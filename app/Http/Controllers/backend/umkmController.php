@@ -19,7 +19,7 @@ class umkmController extends Controller
      {
          return view('admin.umkm.umkm_add');
      }
-    
+
     public function storeUmkm(Request $request)
     {
       $rules=[
@@ -27,52 +27,52 @@ class umkmController extends Controller
          'gambar' => 'required|max:1000|mimes:jpg,jpeg,png',
          'deskripsi' => 'required|min:20',
         ];
-        
-        
+
+
           $messages =[
             'judul.required' => '*Judul harus diisi',
             'gambar.required' => '*Gambar harus diisi',
             'deskripsi.required' => '*Deskripsi harus diisi',
         ];
-        
+
         $this->validate($request,$rules, $messages);
-         
-        $data = new Umkms(); 
+
+        $data = new Umkms();
 
 
         //judul
 
         $data->judul=$request->input('judul');
-        
+
 
 
      //gambar
 
      $fileName = time().'.'.$request->gambar->extension();
         $request->file('gambar')->storeAs('public/umkm', $fileName);
-         
+
         $data->gambar = $fileName;
-       
+
      // deskripsi
         $data->deskripsi= $request->input('deskripsi');
 
         $data->save();
         return redirect()->route('umkm.view')->with('info','Tambah Alat berhasil');
-          
+
     }
   }
 
-  
-    
-
-          
-   
-  
-          
-    
-    
- 
 
 
 
-  
+
+
+
+
+
+
+
+
+
+
+
