@@ -31,7 +31,7 @@ Route::prefix('umkm')->group(function(){
 });
 
 // berita admin
-Route::prefix('berita')->group(function(){
+Route::prefix('admin-berita')->group(function(){
     Route::get('/view', [beritacontroller::class,'index'])->name('berita.view');
     Route::get('/add', [beritacontroller::class,'create'])->name('berita.add');
     Route::post('/store', [beritacontroller::class,'store'])->name('berita.store');

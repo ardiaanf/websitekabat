@@ -46,7 +46,6 @@ class beritacontroller extends Controller
              'konten' => 'required|min:20',
             ];
 
-
               $messages =[
                 'judul.required' => '*Judul harus diisi',
                 'gambar.required' => '*Gambar harus diisi',
@@ -54,26 +53,18 @@ class beritacontroller extends Controller
             ];
 
             $this->validate($request,$rules, $messages);
-
             $data = new berita();
 
-
             //judul
-
             $data->judul=$request->input('judul');
 
-
-
-         //gambar
-
-         $fileName = time().'.'.$request->gambar->extension();
+            //gambar
+            $fileName = time().'.'.$request->gambar->extension();
             $request->file('gambar')->storeAs('public/berita', $fileName);
-
             $data->gambar = $fileName;
 
          // deskripsi
             $data->konten= $request->input('konten');
-
             $data->save();
             return redirect()->route('berita.view')->with('info','Tambah data berhasil');
 
@@ -115,47 +106,29 @@ class beritacontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
-        // $berita = berita::findOrFail($id);
+        // dd($request->all());
+        $this->validate($request, [
+            'judul'  => 'required',
+            'gambar' => 'file|mimes:png,jpg|max:2024',
+            'konten' => 'required|min:20'
+        ]);
 
-        // // $berita->judul = $request->judul;
+        $berita = berita::findorfail($id);
+        $gambar = $request->file('gambar');
 
-        // // $berita->konten = $request->konten;
-        // //validate form
-        // $this->validate($request, [
-        //     'judul'     => 'required|min:5',
-        //     'gambar'     => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'konten'   => 'required|min:10'
-        // ]);
-
-        // //check if image is uploaded
-        // if ($request->hasFile('gambar')) {
-
-        //     //upload new image
-        //     $image = $request->file('gambar');
-        //     $image->storeAs('public/berita', $image->hashName());
-
-        //     //delete old image
-        //     Storage::delete('public/berita/'.$berita->gambar);
-
-        //     //update post with new image
-        //     $berita->update([
-        //         'judul'     => $request->judul,
-        //         'gambar'     => $image->hashName(),
-        //         'konten'   => $request->konten
-        //     ]);
-
-        // } else {
-
-        //     //update post without image
-        //     $berita->update([
-        //         'judul'     => $request->judul,
-        //         'konten'   => $request->konten
-        //     ]);
-        // }
-
-        // //redirect to index
-        // return redirect()->route('berita.view')->with(['success' => 'Data Berhasil Diubah!']);
+        if (!empty($gambar)) {
+            $data = $request->all();
+            $gambar = $request->file('gambar');
+            $new_gambar = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . '_' . $gambar->GetClientOriginalName();
+            $data['gambar'] = '' . $new_gambar;
+            $gambar->storeAs('public/berita', $new_gambar);
+            $berita->update($data);
+        } else {
+            $data['judul'] = $request->judul;
+            $berita->update($data);
+            $data['konten'] = $request->konten;
+        }
+        return redirect()->route('berita.view')->with('success', 'Data berita berhasil ditambahkan');
     }
 
     /**
@@ -170,11 +143,13 @@ class beritacontroller extends Controller
         // $berita =$id->gambar;
         // Storage::disk('public/berita')->delete($berita);
         // $id->delete();
+        berita::findOrFail($id)->delete();
+        return redirect()->route('berita.view')->with('error', 'Data berita berhasil dihapus');
 
 
         // dd($id);
-        $berita = berita::where('id', $id);
-        $berita->Delete();
-        return redirect()->route('berita.view')->with('info','data berhasil dihapus');
+        // $berita = berita::where('id', $id);
+        // $berita->delete();
+        // return redirect()->route('berita.view')->with('info','data berhasil dihapus');
     }
 }
