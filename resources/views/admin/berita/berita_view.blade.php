@@ -30,19 +30,17 @@
                             <p class="text-muted m-b-30 font-14">Data Berita di Kecamatan Kabat.
                             </p>
 
-                            <table id="datatable" class="table table-bordered dt-responsive " cellspacing="0"
-                                >
+                            <table id="datatable" class="table table-bordered dt-responsive" cellspacing="0"
+                                width="100%">
                                 <thead>
                                     <tr>
                                         <th width="10px">No</th>
                                         <th>Judul Berita</th>
                                         <th>Gambar</th>
-                                        <th>Konten</th>
+                                        {{-- <th>Konten</th> --}}
                                         <th class="text-center" width="100px">Action</th>
-
                                     </tr>
                                 </thead>
-
 
                                 <tbody>
                                     @foreach($berita as $berita)
@@ -53,10 +51,13 @@
                                             <img src="{{asset('storage/berita/' .$berita->gambar)}}" width="180px"
                                                 alt="Image">
                                         </td>
-                                        <td>{{$berita->konten}}</td>
+                                        {{-- <td><p style="max-width: 100%;">{{$berita->konten}}</p></td> --}}
                                         <td>
-
                                             <form action="{{ route('berita.delete', $berita->id) }}" method="post">
+                                                <a href="{{-- route('berita.show',$data->id) --}}"
+                                                    class="btn btn-success btn-sm"><i
+                                                        class="nav-icon fas fa-eye"></i>
+                                                </a>
                                                 <a href="{{ route('berita.edit', $berita->id) }}"
                                                     class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
                                                 @csrf
