@@ -18,7 +18,7 @@ use App\Http\Controllers\backend\beritacontroller;
 */
 
 Route::get('/', function () {
-    return view('frontends/index');
+    return view('user/index');
 });
 
 
@@ -46,5 +46,3 @@ Route::prefix('banner')->group(function(){
 
 
 });
-
-
