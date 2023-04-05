@@ -25,7 +25,7 @@
                             <a href="{{ route('berita.add') }}"><button
                                     style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;"
                                     type="button"
-                                    class="btn btn-success waves-light btn-sm waves-effect">Tambah</button></a>
+                                    class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
                             <h4 class="mt-0 header-title">Halaman Berita</h4>
                             <p class="text-muted m-b-30 font-14">Data Berita di Kecamatan Kabat.
                             </p>
