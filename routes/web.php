@@ -17,8 +17,14 @@ use App\Http\Controllers\backend\beritacontroller;
 |
 */
 
+Route::get('/home', function () {
+    return view('user/home');
+});
+Route::get('/strukturKecamatan', function () {
+    return view('user/struktur');
+});
 Route::get('/', function () {
-    return view('user/index');
+    return view('user/home');
 });
 
 
