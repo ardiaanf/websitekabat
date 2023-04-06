@@ -18,7 +18,7 @@ use App\Http\Controllers\backend\desa\namadesaController;
 */
 
 Route::get('/', function () {
-    return view('frontends/index');
+    return view('user/index');
 });
 
 
@@ -66,7 +66,5 @@ Route::prefix('banner')->group(function(){
     Route::post('/store', [bannerController::class,'store'])->name('banner.store');
     // Route::get('/edit/{id}', [beritacontroller::class, 'edit'])->name('berita.edit');
     // Route::put('/update/{id}', [beritacontroller::class, 'update'])->name('berita.update');
-    Route::delete('/delete/{id}', [bannerController::class, 'destroy'])->name('banner.delete');
+    // Route::delete('/delete/{id}', [bannerController::class, 'destroy'])->name('banner.delete');
 });
-
-
