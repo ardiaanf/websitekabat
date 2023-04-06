@@ -54,10 +54,6 @@
                                         {{-- <td><p style="max-width: 100%;">{{$berita->konten}}</p></td> --}}
                                         <td>
                                             <form action="{{ route('berita.delete', $berita->id) }}" method="post">
-                                                <a href="{{-- route('berita.show',$data->id) --}}"
-                                                    class="btn btn-success btn-sm"><i
-                                                        class="nav-icon fas fa-eye"></i>
-                                                </a>
                                                 <a href="{{ route('berita.edit', $berita->id) }}"
                                                     class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
                                                 @csrf

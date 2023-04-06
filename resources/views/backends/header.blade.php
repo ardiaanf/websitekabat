@@ -13,23 +13,22 @@
         <ul>
         <li class="menu-title">Log</li>
         <li>
-            <a href="faq" ><i class="mdi mdi-view-dashboard"></i></i><span>Dashboard</span></a>
+            <a href="/dashboard" ><i class="mdi mdi-view-dashboard"></i></i><span>Dashboard</span></a>
         </li>
 
         <li class="has_sub">
                 <a href="javascript:void(0);" ><i class="fas fa-building fa-lg"></i></i><span>Kecamatan<span class="pull-right"><i class="mdi mdi-chevron-right"></i></span> </span></a>
                 <ul class="list-unstyled">
-                    <li><a href="">Bagan</a></li>
+                    <li><a href="/bagan">Bagan</a></li>
                 </ul>
             </li>
 
         <li class="has_sub">
                 <a href="javascript:void(0);" ><i class="fas fa-archway fa-lg"></i><span>Desa<span class="pull-right"><i class="mdi mdi-chevron-right"></i></span> </span></a>
                 <ul class="list-unstyled">
-                    <li><a href="">Nama Desa</a></li>
-                    <li><a href="">Profil Desa</a></li>
-                    <li><a href="">Struktur Desa</a></li>
-                    <li><a href="">Potensi Desa</a></li>
+                    <li><a href="/namadesa">Nama Desa</a></li>
+                    <li><a href="/strukturdesa">Struktur Desa</a></li>
+                    <li><a href="/potensidesa">Potensi Desa</a></li>
                 </ul>
             </li>
 

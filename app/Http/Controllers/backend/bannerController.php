@@ -15,26 +15,33 @@ class bannerController extends Controller
         return view('admin.banner.banner_view', compact('banner'));
 
      }
-   public function bannerAdd(){
-   // 
-}
-public function store(Request $request)
-{
-    $this->validate($request, [
-        'gambar_banner' => 'required|image|file|max:1024',
-    ]);
 
-    $data = $request->all();
-    $gambar = $request->file('gambar_banner');
-    $new_gambar = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . '_' . $gambar->GetClientOriginalName();
+    public function bannerAdd(){
+        // return view('admin.banner.banner_view');
+    }
 
-    $data['gambar_banner'] = 'images/banner/' . $new_gambar;
+    public function store(Request $request)
+    {
+        $request->validate([
+            'gambar_banner' => 'required|image|file|max:1024',
+            'keterangan'    => 'required|min:10'
+        ]);
 
-    $gambar->storeAs('public/images/banner', $new_gambar);
-    Banners::create($data);
+        $data = $request->all();
+        $gambar = $request->file('gambar_banner');
+        $new_gambar = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . '_' . $gambar->GetClientOriginalName();
+        $gambar->storeAs('public/images/banner', $new_gambar);
 
-    return redirect()->route('banner.view')->with('success', 'Banner berhasil ditambahkan');
-}
+        $data['gambar_banner'] = 'images/banner/' . $new_gambar;
+        Banners::create($data);
+
+        return redirect()->route('banner.view')->with('success', 'Banner berhasil ditambahkan');
+    }
+
+    public function destroy($id){
+        Banners::findOrFail($id)->delete();
+        return redirect()->route('banner.view')->with('error', 'Data banner berhasil dihapus');
+    }
 
 
 }
