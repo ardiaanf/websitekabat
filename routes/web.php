@@ -23,10 +23,9 @@ Route::get('/home', function () {
 Route::get('/strukturKecamatan', function () {
     return view('user/struktur');
 });
-Route::get('/', function () {
-    return view('user/home');
+Route::get('/pengaduan', function () {
+    return view('user/pengaduan');
 });
-
 
 
 

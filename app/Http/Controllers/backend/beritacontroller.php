@@ -18,8 +18,10 @@ class beritacontroller extends Controller
     public function index()
     {
         $berita = berita::all();
-        // $data['berita']=berita ::all();
-        return view('admin.berita.berita_view', compact('berita'));
+        // $berita = berita ::paginate(20);
+        return view('user.home', compact('berita'));
+        dd($berita);
+        // return view('admin.berita.berita_view', compact('berita'));
     }
 
     /**

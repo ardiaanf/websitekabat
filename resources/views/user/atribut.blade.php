@@ -30,7 +30,7 @@
         <link href="css/style.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Topbar Start -->
+        {{-- <!-- Topbar Start -->
         <div class="container-fluid bg-dark px-5 d-none d-lg-block">
             <div class="row gx-0">
                 <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
@@ -51,38 +51,28 @@
                 </div>
             </div>
         </div>
-        <!-- Topbar End -->
+        <!-- Topbar End --> --}}
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
-            <a href="index.html" class="navbar-brand p-0">
-                <h2 class="m-0"><img src="img/logo_bwi.png"alt="logoBwi" width="40" height="50"> Kecamatan Kabat</h2>
+            <a href="/home" class="navbar-brand p-0">
+                <h2 class="m-0"><img src="img/logo_bwi.png"alt="logoBwi" class="image-brand"> Kecamatan Kabat</h2>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Services</a>
+                    <a href="/home" class="nav-item nav-link">Home</a>
+                    <a href="/desa" class="nav-item nav-link">Daftar Desa</a>
+                    <a href="/pengaduan" class="nav-item nav-link">Pengaduan</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pemerintahan</a>
                         <div class="dropdown-menu m-0">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="detail.html" class="dropdown-item">Blog Detail</a>
+                            <a href="blog.html" class="dropdown-item">Visi Misi</a>
+                            <a href="/strukturKecamatan" class="dropdown-item">Struktur Pemerintahan</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="price.html" class="dropdown-item">Pricing Plan</a>
-                            <a href="feature.html" class="dropdown-item">Our features</a>
-                          <a href="team.html" class="dropdown-item">Team Members</a>
-                          <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="quote.html" class="dropdown-item">Free Quote</a>
-                      </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                   </div>
                 </div>
             </nav>
@@ -99,7 +89,7 @@
     <div class="container">
       <div class="row gx-5">
         <div class="col-lg-4 col-md-6 footer-about">
-          <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
+          <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-secondary p-4">
             <a href="index.html" class="navbar-brand">
               <h3 class="m-0 text-white"><image src="img/logo_bwi.png"width="50" height="60"></image> Kecamatan Kabat</h3>
             </a>
@@ -119,22 +109,22 @@
                 <h3 class="text-light mb-0">Get In Touch</h3>
               </div>
               <div class="d-flex mb-2">
-                <i class="bi bi-geo-alt text-primary me-2"></i>
+                <i class="bi bi-geo-alt text-secondary me-2"></i>
                 <p class="mb-0">123 Street, New York, USA</p>
               </div>
               <div class="d-flex mb-2">
-                <i class="bi bi-envelope-open text-primary me-2"></i>
+                <i class="bi bi-envelope-open text-secondary me-2"></i>
                 <p class="mb-0">info@example.com</p>
               </div>
               <div class="d-flex mb-2">
-                <i class="bi bi-telephone text-primary me-2"></i>
+                <i class="bi bi-telephone text-secondary me-2"></i>
                 <p class="mb-0">+012 345 67890</p>
               </div>
               <div class="d-flex mt-4">
-                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
-                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
-                <a class="btn btn-primary btn-square me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
-                <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                <a class="btn btn-secondary btn-square me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                <a class="btn btn-secondary btn-square me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                <a class="btn btn-secondary btn-square me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                <a class="btn btn-secondary btn-square" href="#"><i class="fab fa-instagram fw-normal"></i></a>
               </div>
             </div>
             <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
@@ -142,12 +132,12 @@
                 <h3 class="text-light mb-0">Quick Links</h3>
               </div>
               <div class="link-animated d-flex flex-column justify-content-start">
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Meet The Team</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Home</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>About Us</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Our Services</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Meet The Team</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Latest Blog</a>
+                <a class="text-light" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Contact Us</a>
               </div>
             </div>
             <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
@@ -155,12 +145,12 @@
                 <h3 class="text-light mb-0">Popular Links</h3>
               </div>
               <div class="link-animated d-flex flex-column justify-content-start">
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Meet The Team</a>
-                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
-                <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Home</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>About Us</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Our Services</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Meet The Team</a>
+                <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Latest Blog</a>
+                <a class="text-light" href="#"><i class="bi bi-arrow-right text-secondary me-2"></i>Contact Us</a>
               </div>
             </div>
           </div>
@@ -187,7 +177,7 @@
   <!-- Footer End -->
 
   <!-- Back to Top -->
-  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+  <a href="#" class="btn btn-lg btn-secondary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
   <!-- JavaScript Libraries -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
