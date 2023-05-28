@@ -18,17 +18,17 @@
 @section('content')
 
       <div class="page-content-wrapper">
-            <div class="container-fluid">  
-           
-                                                
-            
+            <div class="container-fluid">
+
+
+
                     <div class="row">
                          <div class="col-12">
-                          
+
                                 <div class="card m-b-20">
                                  <div class="card-body">
                           <form method="post" action="{{route('umkmAdd.store')}}" enctype="multipart/form-data">
-                                @csrf  
+                                @csrf
                                                 <div class="form-grup mb-3">
                                                 <label for="" style="color: #686868;"  class="col-sm-7 col-form-label">-Judul Umkm</label>
                                                     <input  type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" id="example-text-input"  placeholder="Masukkan Judul">
@@ -38,8 +38,8 @@
                                                      </div>
                                                     @enderror
                                                      </div>
-                                               
-                                               
+
+
                                                 <div class="form-grup mb-3">
                                                 <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Umkm</label>
                                                  <input type="file" class="form-control filestyle @error('gambar') is-invalid @enderror" name="gambar" data-buttonname="btn-secondary" >
@@ -49,7 +49,7 @@
                                                      </div>
                                                     @enderror
                                                  </div>
-                                                
+
                                              <!--       <div class="form-grup mb-3">
                                                 <label for="" style="color: #686868;"  class="col-sm-7 col-form-label">-Judul Umkm</label>
                                                     <input  type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="" id="example-text-input"  placeholder="Masukkan Judul">
@@ -59,28 +59,28 @@
                                                      </div>
                                                     @enderror
                                                      </div> -->
-                       
+
                                              <div class="form-grup mb-3">
                                                 <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Deskripsi Umkm</label>
-                                                <textarea type="text" id="summernote" class="form-control  @error('deskripsi') is-invalid @enderror" name="deskripsi"></textarea> 
+                                                <textarea type="text" id="summernote" class="form-control  @error('deskripsi') is-invalid @enderror" name="deskripsi"></textarea>
                                                 @error('deskripsi')
                                                     <div class="invalid-feedback">
                                                     {{$message}}
                                                      </div>
                                                     @enderror
-                                              
-                                            </div>  
+
+                                            </div>
 
                                            <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-info waves-light btn-sm waves-effect">Simpan</button>
                                         </div>
                                     </div>
-                                   
+
                         </div> <!-- end col -->
 
                 </div> <!-- end row -->
                 </form>
-            
-                                               
+
+
             </div><!-- container -->
 
     </div> <!-- Page content Wrapper -->
@@ -106,7 +106,7 @@
 <script>
          jQuery(document).ready(function(){
                 $('#summernote').summernote({
-                    
+
                     height: 300,
         toolbar: [
             [ 'style', [ 'style' ] ],
@@ -120,10 +120,10 @@
             [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
         ]
     });
-            
+
 
             });
-      
+
 </script>
 @endsection
 
