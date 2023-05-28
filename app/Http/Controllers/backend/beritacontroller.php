@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\berita;
 use Illuminate\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use illuminate\Support\Str;
 
 class beritacontroller extends Controller
 {
@@ -19,9 +20,7 @@ class beritacontroller extends Controller
     {
         $berita = berita::all();
         // $berita = berita ::paginate(20);
-        return view('user.home', compact('berita'));
-        dd($berita);
-        // return view('admin.berita.berita_view', compact('berita'));
+        return view('admin.berita.berita_view', compact('berita'));
     }
 
     /**
@@ -43,7 +42,7 @@ class beritacontroller extends Controller
     public function store(Request $request)
     {
         $rules=[
-            'judul' => 'required',
+             'judul' => 'required',
              'gambar' => 'required|max:1000|mimes:jpg,jpeg,png',
              'konten' => 'required|min:20',
             ];
@@ -69,6 +68,9 @@ class beritacontroller extends Controller
             $data->konten= $request->input('konten');
             $data->save();
             return redirect()->route('berita.view')->with('info','Tambah data berhasil');
+
+        // judul ke slug
+        // $data->slug_judul = Str::slug($request->get('judul'));
 
 
     }
@@ -112,7 +114,7 @@ class beritacontroller extends Controller
         $this->validate($request, [
             'judul'  => 'required',
             'gambar' => 'file|mimes:png,jpg|max:2024',
-            'konten' => 'required|min:20'
+            'konten' => 'required|min:10'
         ]);
 
         $berita = berita::findorfail($id);

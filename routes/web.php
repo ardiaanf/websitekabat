@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\umkmController;
 use App\Http\Controllers\backend\bannerController;
 use App\Http\Controllers\backend\beritacontroller;
-
+use App\Http\Controllers\frontend\beritaUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +17,9 @@ use App\Http\Controllers\backend\beritacontroller;
 |
 */
 
-Route::get('/home', function () {
-    return view('user/home');
-});
+// Route::get('/home', function () {
+//     return view('user/home');
+// });
 Route::get('/strukturKecamatan', function () {
     return view('user/struktur');
 });
@@ -27,6 +27,8 @@ Route::get('/pengaduan', function () {
     return view('user/pengaduan');
 });
 
+Route::get('/home', [beritaUserController::class,'index'])->name('berita.user');
+Route::get('/detail_berita/{id}', [beritaUserController::class,'detail_berita']);
 
 
 Route::prefix('umkm')->group(function(){

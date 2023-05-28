@@ -8,8 +8,8 @@
         <meta content="Free HTML Templates" name="description" />
         
         <!-- Favicon -->
-        <link href="/img/logo_bwi.png" rel="icon" />
-        
+        <link href="{{ asset('img/logo_bwi.png') }}" rel="icon" />
+
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,14 +20,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
         
         <!-- Libraries Stylesheet -->
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-        <link href="lib/animate/animate.min.css" rel="stylesheet" />
+        <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet" />
         
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
         
         <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet" />
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     </head>
     <body>
         {{-- <!-- Topbar Start -->
@@ -55,7 +55,7 @@
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
             <a href="/home" class="navbar-brand p-0">
-                <h2 class="m-0"><img src="img/logo_bwi.png"alt="logoBwi" class="image-brand"> Kecamatan Kabat</h2>
+                <h2 class="m-0"><img src="{{ asset('img/logo_bwi.png') }}"alt="logoBwi" class="image-brand"> Kecamatan Kabat</h2>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -84,6 +84,7 @@
         </div>
         <!-- Spinner End -->
         @yield('atributs')
+        
    <!-- Footer Start -->
    <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
@@ -91,7 +92,7 @@
         <div class="col-lg-4 col-md-6 footer-about">
           <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-secondary p-4">
             <a href="index.html" class="navbar-brand">
-              <h3 class="m-0 text-white"><image src="img/logo_bwi.png"width="50" height="60"></image> Kecamatan Kabat</h3>
+              <h3 class="m-0 text-white"><image src="{{ asset('img/logo_bwi.png') }}"width="50" height="60"></image> Kecamatan Kabat</h3>
             </a>
             <p class="mt-3 mb-4">Lorem diam sit erat dolor elitr et, diam lorem justo amet clita stet eos sit. Elitr dolor duo lorem, elitr clita ipsum sea. Diam amet erat lorem stet eos. Diam amet et kasd eos duo.</p>
             <form action="">
@@ -182,13 +183,13 @@
   <!-- JavaScript Libraries -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/wow/wow.min.js"></script>
-  <script src="lib/easing/easing.min.js"></script>
-  <script src="lib/waypoints/waypoints.min.js"></script>
-  <script src="lib/counterup/counterup.min.js"></script>
-  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+  <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+  <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+  <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+  <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
   <!-- Template Javascript -->
-  <script src="js/main.js"></script>
+  <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>
