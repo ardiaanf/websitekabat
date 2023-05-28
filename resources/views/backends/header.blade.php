@@ -19,36 +19,25 @@
         <li class="has_sub">
                 <a href="javascript:void(0);" ><i class="fas fa-building fa-lg"></i></i><span>Kecamatan<span class="pull-right"><i class="mdi mdi-chevron-right"></i></span> </span></a>
                 <ul class="list-unstyled">
-                    <li><a href="">Bagan</a></li>
+                    <li><a href="">Struktur Kecamatan</a></li>
+                    <li><a href="">Berita</a></li>
+                    <li><a href="{{route('umkm.view')}}">Umkm</a></li>
+                    <li><a href="{{route('banner.view')}}">Banner</a></li>
                 </ul>
             </li>
 
         <li class="has_sub">
                 <a href="javascript:void(0);" ><i class="fas fa-archway fa-lg"></i><span>Desa<span class="pull-right"><i class="mdi mdi-chevron-right"></i></span> </span></a>
                 <ul class="list-unstyled">
-                    <li><a href="">Nama Desa</a></li>
-                    <li><a href="">Profil Desa</a></li>
+                    <li><a href="{{route('index.view')}}">Nama Desa</a></li>
+                    <li><a href="{{route('potensi.view')}}">Potensi Desa</a></li>
                     <li><a href="">Struktur Desa</a></li>
-                    <li><a href="">Potensi Desa</a></li>
                 </ul>
             </li>
             
-            <li>
-                <a href="{{route('banner.view')}}" ><i class="fas fa-images fa-lg"></i></i><span>Banner</span></a>
-            </li> 
+           
                
-        <li class="has_sub">
-                <a href="javascript:void(0);" ><i class="fa-solid fa-hands-holding-child fa-lg"></i><span> Umkm<span class="pull-right"><i class="mdi mdi-chevron-right"></i></span> </span></a>
-                <ul class="list-unstyled">
-                    <li><a href="{{route('umkm.view')}}">Log Umkm</a></li>
-                
-                </ul>
-            </li> 
-            
-
-            <li>
-                <a href="#" ><i class="fa-solid fa-newspaper fa-lg"></i><span>Berita</span></a>
-            </li>          
+             
 
 </ul>
    

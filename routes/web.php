@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\umkmController;
 use App\Http\Controllers\backend\bannerController;
+use App\Http\Controllers\backend\desaController;
+use App\Http\Controllers\backend\potensiDesaController;
 
 
 /*
@@ -31,9 +33,26 @@ Route::prefix('umkm')->group(function(){
 
 Route::prefix('banner')->group(function(){
     Route::get('/view', [bannerController::class,'bannerView'])->name('banner.view'); 
-    Route::post('/store', [bannerController::class,'bannerView'])->name('banner.store'); 
+    Route::post('/store', [bannerController::class,'store'])->name('banner.store'); 
+    Route::get('/edit/{id_banner}', [bannerController::class, 'edit'])->name('banner.edit');
+    Route::patch('/update/{id_banner}', [bannerController::class, 'update'])->name('banner.update');
+    Route::delete('/destroy/{id_banner}', [bannerController::class, 'destroy'])->name('banner.destroy');
   
 
 });
+Route::prefix('desa')->group(function(){
+    Route::get('/view', [desaController::class,'index'])->name('index.view'); 
+    Route::post('/store', [desaController::class,'store'])->name('desa.store'); 
+   
+
+});
+
+Route::prefix('potensiDesa')->group(function(){
+    Route::get('/view', [potensiDesaController::class,'potensiDesaView'])->name('potensi.view'); 
+    Route::get('/add', [potensiDesaController::class,'potensiAdd'])->name('potensi.add');
+    Route::post('/store', [potensiDesaController::class,'store'])->name('potensi.store');
+
+});
+
 
 

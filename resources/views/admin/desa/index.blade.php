@@ -10,7 +10,7 @@
 @endsection
 
 @section('breadcrumb')
-<h3 class="page-title">Banner</h1>
+<h3 class="page-title">Desa</h1>
 @endsection
 
 @section('content')
@@ -25,33 +25,30 @@
                                         <div class="card-body">
                                         <button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-success waves-light btn-sm waves-effect"
                                         data-toggle="modal" data-target="#ssmodal">Tambah</button>
-                                            <h4 class="mt-0 header-title">Banner</h4>
-                                       <p class="text-muted m-b-30 font-14">Untuk Penambahan dan perubahan banner di halaman utama</p>
+                                            <h4 class="mt-0 header-title">Nama Desa</h4>
+                                       <p class="text-muted m-b-30 font-14">Penambahan Nama Desa</p>
                                             <table id="datatable" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                   <thead>
                                   <tr>
                                   <th width="10px">No</th>
-                                  <th>Gambar</th>
-                                  <th>Keterangan</th>
+                                  <th>Nama Desa</th>
                                   <th class="text-center"width="80px">Action</th>
                                 </tr>
                                 </thead>
 
 
                                   <tbody>
-                                  @foreach ($banner as $data)
+                                  @foreach ($dessa as $data)
+                              
                                  <tr>
-                                 <td>{{ $loop->iteration }}</td>
-                                            <td> <img src="{{ Storage::url($data->gambar_banner) }}" width="80px"
-                                                    class="img-thumbnail"> </td>
-                                            <td>{{ $data->keterangan }}</td>
+                                 <td>{{ $data->id }}</td>
+                                            <td>{{ $data->nama_desa}}</td>
                                            
                                             <td>
-                                                <form action="{{ route('banner.destroy', $data->id_banner) }}"
+                                                <form action=""
                                                     method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <a href="{{ route('banner.edit', Crypt::encrypt($data->id_banner)) }}"
+                                                   
+                                                    <a href=""
                                                         class="btn btn-success btn-sm"><i class="nav-icon fas fa-edit"></i>
                                                         &nbsp; Edit</a>
 
@@ -77,38 +74,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Banner</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Desa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>  
       </div>
       <div class="modal-body">
-      <form action="{{ route('banner.store') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('desa.store') }}" method="post" enctype="multipart/form-data">
       @csrf
         <div class="card-body">
             
                             <div class="form-group">
-                                <label for="">-Pilih File Banner</label>
+                                <label for="">Nama Desa</label>
                                 <div class="input-group">
-                                <input type="file" class="form-control  @error('gambar_banner') is-invalid @enderror " name="gambar_banner" data-buttonname="btn-secondary" >
+                                <input  name="nama_desa" class="form-control" type="text" placeholder="Masukkan Nama Desa">
+
                                     </div>    
-                                    <div class="text-danger">
-                                    @error('gambar_banner')
-                                        Gambar tidak boleh kosong.
-                                    @enderror
-                                </div>
+                                   
                             </div>
 
-                            <div class="form-group">
-                            <label for="exampleFormControlTextarea1" class="form-label">-Keterangan</label>
-                            <textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="exampleFormControlTextarea1" rows="5" ></textarea>
-                            <div class="text-danger">
-                                    @error('keterangan')
-                                        Judul tidak boleh kosong.
-                                    @enderror
-                                </div>
-                                
-                            </div>
+                           
                         </div>
                         <!-- /.card-body -->
                         <div class="modal-footer justify-content-between">

@@ -10,11 +10,11 @@ class Banners extends Model
     use HasFactory;
     protected $primaryKey = 'id_banner';
     protected $fillable = ['gambar_banner', 'keterangan'];
-    protected $tabel = 'banners';
+    protected $tabel = 'Banners';
 
     public function get_banner()
     {
-        $query = DB::table('banners')
+        $query = DB::table('Banners')
             ->orderBy('id_banner', 'DESC')
             ->limit(3)
             ->get();
