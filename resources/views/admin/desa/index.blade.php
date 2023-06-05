@@ -45,10 +45,12 @@
                                             <td>{{ $data->nama_desa}}</td>
                                            
                                             <td>
-                                                <form action=""
+                                               
+                                                <form action="{{ route('desa.delete', $data->id) }}" 
                                                     method="post">
-                                                   
-                                                    <a href=""
+                                                    @csrf
+                                                    @method('delete')     
+                                                    <a href="{{ route('desa.edit', Crypt::encrypt($data->id)) }}"
                                                         class="btn btn-success btn-sm"><i class="nav-icon fas fa-edit"></i>
                                                         &nbsp; Edit</a>
 

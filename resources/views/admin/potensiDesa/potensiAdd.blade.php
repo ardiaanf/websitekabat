@@ -43,12 +43,23 @@
                                                      <div class="form-grup mb-3">
                                                      <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
                                                      <select class="form-select" aria-label="Default select example" name="desa_id"
-                                            id="desa_id">>
+                                            id="desa_id">
                                                      <option selected>Pilih Desa</option>
                                                      @foreach ($desa as $potensidesa)
                                             <option value="{{$potensidesa->id}}">{{$potensidesa->nama_desa}}</option>
                                             @endforeach
-                                                     
+</select>
+</div>
+                                      
+                                       <!-- <div class="form-group mb-3">
+    <label for="exampleFormControlSelect1" style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
+    <select class="form-select"  name="desa_id" id="desa_id">
+    <option selected>Pilih Desa</option>
+    @foreach ($desa as $potensidesa)
+      <option value="{{$potensidesa->id}}">{{$potensidesa->nama_desa}}</option>
+      @endforeach
+    </select>
+  </div> -->
 
                                                         <div class="form-grup mb-3">
                                                 <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Potensi Desa</label>

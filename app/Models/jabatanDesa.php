@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class desa extends Model
+class jabatanDesa extends Model
 {
     use HasFactory;
-    protected $table = 'desas';
-    protected $primaryKey = 'id';
+    protected $table = 'jabatan_desas';
+    protected $primaryKey = 'id';  
     protected $fillable = [
         'id',
-        'nama_desa'
+       'namaJabatan'
     ];
-    public function potensiDesa(){
-        return $this->hasMany(potensiDesa::class);
-    }
+
     public function strukturDesa(){
         return $this->hasMany(strukturDesa::class);
     }

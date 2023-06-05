@@ -28,5 +28,33 @@ class desaController extends Controller
       return redirect()->route('index.view')->with('success', 'Banner berhasil ditambahkan');
 
    }
-  
+   public function show($id){
+
+   }
+
+   public function edit(Request $request, $id){
+      $dessa = desa::findOrFail($id);
+        return view('admin.desa.edit', compact('dessa'));
+
+   }
+   public function update(Request $request, $id)
+   {
+        $validateData= $request->validate([
+              'nama_desa'=> 'required',   
+    
+          ]);
+        
+          $dessa=desa::find($id);
+          $dessa->nama_desa=$request->nama_desa;
+          $dessa->save();
+      
+          return redirect()->route('index.view')->with('info','Tambah Bahan berhasil');
+   }
+
+   public function destroy($id)
+   {
+     
+       desa::findOrFail($id)->delete();
+       return redirect()->route('index.view')->with('error', 'Data berita berhasil dihapus');
+}
 }
