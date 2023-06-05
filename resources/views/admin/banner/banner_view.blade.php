@@ -2,18 +2,21 @@
 
 @section('css')
 <!-- DataTables -->
-<link href="{{ URL::asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
- <!-- Responsive datatable examples -->
-<link href="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link href="{{ URL::asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ URL::asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<!-- Responsive datatable examples -->
+<link href="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 @endsection
 
 @section('breadcrumb')
 <h3 class="page-title">Banner</h1>
-@endsection
+    @endsection
 
-@section('content')
+    @section('content')
 
 
 
@@ -37,6 +40,21 @@
                                 </tr>
                                 </thead>
 
+                                <tbody>
+                                    @foreach ($banner as $banner)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td><img src="{{asset('storage/banner/' .$banner->gambar_banner)}}" width="180px"
+                                            alt="Image"></td>
+                                        <td>{{ $banner->keterangan }}</td>
+                                        <td>
+                                            <form action="{{-- route('banner.delete',$banner->id) --}}" method="post">
+                                                {{-- <a href="{{ route('berita.edit', $berita->id) }}"
+                                                    class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a> --}}
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm"> <i
+                                                        class=" fa fa-trash fa-lg"></i></button>
 
                                   <tbody>
                                   @foreach ($banner as $data)
@@ -124,27 +142,26 @@
 </div>
 @endsection
 
-@section('script')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" ></script>
-<!-- Required datatable js -->
-<script src="{{ URL::asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-<!-- Buttons examples -->
-<script src="{{ URL::asset('assets/plugins/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/jszip.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/pdfmake.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/vfs_fonts.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/buttons.colVis.min.js') }}"></script>
-<!-- Responsive examples -->
-<script src="{{ URL::asset('assets/plugins/datatables/dataTables.responsive.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
+    @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <!-- Required datatable js -->
+    <script src="{{ URL::asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <!-- Buttons examples -->
+    <script src="{{ URL::asset('assets/plugins/datatables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/buttons.colVis.min.js') }}"></script>
+    <!-- Responsive examples -->
+    <script src="{{ URL::asset('assets/plugins/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
 
-<!-- Datatable init js -->
-<script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
-@endsection
-
+    <!-- Datatable init js -->
+    <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
+    @endsection
