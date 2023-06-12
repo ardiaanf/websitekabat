@@ -17,7 +17,7 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">
-                                        <a href="{{route('potensi.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-success waves-light btn-sm waves-effect">Tambah</button></a>
+                                        <a href="{{route('potensi.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
                                             <h4 class="mt-0 header-title">Potensi Desa</h4>
                                        <p class="text-muted m-b-30 font-14">Potensi Desa di Kecamatan Kabat.
                                             </p>
@@ -48,12 +48,12 @@
     
     
     <td> 
-    <img src="{{ asset('storage/potensidesa/' .$data->gambar_potensi) }}" width="180px" alt="Image">
+    <img src="{{ asset('storage/potensidesa/' .$data->gambar) }}" width="180px" alt="Image">
     </td>
     <!-- <td>{!! $data->potensi_desa !!}</td> -->
     <td>
-    <a href=""class="btn btn-info btn-sm"><i class="fa fa-eye fa-lg"></i></a>
-    <a href=""class="btn btn-success btn-sm"><i class="fa fa-edit fa-lg"></i></a>
+    <a href=""class="btn btn-success btn-sm"><i class="fa fa-eye fa-lg"></i></a>
+    <a href="{{ route('potensi.edit', $data->id) }}"class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
    
     
     <button class="btn btn-danger btn-sm"><i class="fa fa-trash fa-lg"></i></button>

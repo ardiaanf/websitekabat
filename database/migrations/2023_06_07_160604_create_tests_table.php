@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('struktur_desas', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->id();
+            $table->longText('content');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('struktur_desas');
+        Schema::dropIfExists('tests');
     }
 };

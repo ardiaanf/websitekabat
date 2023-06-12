@@ -7,7 +7,8 @@ use App\Http\Controllers\backend\beritaController;
 use App\Http\Controllers\backend\desaController;
 use App\Http\Controllers\backend\potensiDesaController;
 use App\Http\Controllers\backend\strukturDesaController;
-
+use App\Http\Controllers\backend\testController;
+use App\Http\Controllers\backend\content;
 
 // use App\Http\Controllers\backend\beritacontroller;
 // use App\Http\Controllers\frontend\beritaUserController;
@@ -78,9 +79,10 @@ Route::prefix('desa')->group(function(){
 });
 
 Route::prefix('potensiDesa')->group(function(){
-    Route::get('/view', [potensiDesaController::class,'potensiDesaView'])->name('potensi.view'); 
-    Route::get('/add', [potensiDesaController::class,'potensiAdd'])->name('potensi.add');
+    Route::get('/view', [potensiDesaController::class,'index'])->name('potensi.view'); 
+    Route::get('/add', [potensiDesaController::class,'add'])->name('potensi.add');
     Route::post('/store', [potensiDesaController::class,'store'])->name('potensi.store');
+    Route::get('/edit/{id}', [potensiDesaController::class, 'edit'])->name('potensi.edit');
 
 });
 
@@ -94,6 +96,17 @@ Route::prefix('strukturDesa')->group(function(){
      Route::get('/add', [strukturDesaController::class,'add'])->name('struktur.add');
     Route::post('/store', [strukturDesaController::class,'store'])->name('struktur.store');
 });
+
+
+Route::prefix('test')->group(function(){
+    Route::get('/view', [testController::class,'index'])->name('indextest.view'); 
+     Route::get('/add', [testController::class,'add'])->name('test.add');
+    
+     Route::post('/store', [testController::class,'store'])->name('test.store');
+});
+
+//Route::post('/image/upload', [content::class, 'uploadImage'])->name('image.upload');
+
 
 
 

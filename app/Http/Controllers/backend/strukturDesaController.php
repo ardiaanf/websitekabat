@@ -31,7 +31,7 @@ class strukturDesaController extends Controller
             'desa_id'=>'required',
             'nama'=>'required',
             'jabatan'=>'required',
-            'fotoProfil'=>'required'
+            'fotoProfil'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
             
           
@@ -41,33 +41,73 @@ class strukturDesaController extends Controller
             $data->jabatan=$request->jabatan;
 
             //gambar
-            
-            $fileName = time().'.'.$request->fotoProfil->extension();
-            if ($request->file('fotoProfil')->storeAs('public/strukturDesa', $fileName)){
-                $data->fotoProfil = $fileName;
-            }else{
-               $data['fotoProfil'] = null;
-            }
+
+            if ($request->hasFile('fotoProfil')) {
+               $fotoProfil = $request->file('fotoProfil');
+   
+               // Generate a unique file name
+               $fileName = uniqid() . '.' . $fotoProfil->getClientOriginalExtension();
+   
+               // Store the image in the storage directory
+               $path = $fotoProfil->storeAs('public/strukturDesa', $fileName);
+
+               $data->fotoProfil = $fileName;
+   
+               // Perform further processing or save the path to the database
+               // For example:
+               // $imageModel = new Image();
+               // $imageModel->file_path = $path;
+               // $imageModel->save();
+
+
+   
              
-            // $data->fotoProfil = $fileName;
+           } else {
+               // Handle the case when no image is uploaded
 
+               $data['fotoProfil'] = null;
+              // return 'No image file uploaded.';
+           }
 
-
-           if ($request->hasFile('fotoProfil')) {
-                  $fileName = time().'.'.$request->fotoProfil->extension();
-            $fotoProfil = $request->file('fotoProfil')->storeAs('public/strukturDesa', $fileName);
+         //    if ($request->hasFile('fotoProfil')) {
+         //       // Upload gambar jika ada file yang diunggah
+         //       $image = $request->file('fotoProfil');
+         //       $path = $image->store('public/strukturDesa'); // Simpan gambar ke direktori public/images
+   
                
-         //       // Handle image upload
-         //       $imagePath = $fotoProfil->store('public/strukturDesa');
-               
-         //       // Save the image path or filename to the database column
-              $data['fotoProfil'] = $fileName;
-            } else {
-         //       // No image uploaded, set the image column to null
-              $data['fotoProfil'] = null;
+         //   } else {
+         //       // Tangani ketika tidak ada file yang diunggah
+         //       $path = null; // Atur path menjadi null atau sesuai kebutuhan Anda
          //   }
+
+
+            
+         //  $fileName = time().'.'.$request->fotoProfil->extension();
+         //    if ($request->file('fotoProfil')->storeAs('public/strukturDesa', $fileName)){
+         //        $data->fotoProfil = $fileName;
+         //    }else{
+         //       $data['fotoProfil'] = null;
+         //    }
+             
+         //    // $data->fotoProfil = $fileName;
+
+
+
+         //   if ($request->hasFile('fotoProfil')) {
+         //          $fileName = time().'.'.$request->fotoProfil->extension();
+         //    $fotoProfil = $request->file('fotoProfil')->storeAs('public/strukturDesa', $fileName);
+               
+         // //       // Handle image upload
+         // //       $imagePath = $fotoProfil->store('public/strukturDesa');
+               
+         // //       // Save the image path or filename to the database column
+         //      $data['fotoProfil'] = $fileName;
+         //    } else {
+         // //       // No image uploaded, set the image column to null
+         //      $data['fotoProfil'] = null;
+         // //   }
            
-            }
+         //    }
             
             $data->save();
         

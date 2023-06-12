@@ -13,8 +13,8 @@ class potensiDesa extends Model
     protected $fillable = [
         'id',
         'desa_id',
-        'potensi_desa',
-        'gambar_desa'
+        'content',
+        'gambar'
     ];
     public function desas(){
         return $this->belongsTo(desa::class, 'desa_id');

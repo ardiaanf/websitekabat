@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('potensi_desas', function (Blueprint $table) {
             $table->id();
             $table->string('desa_id');
-            $table->string('potensi_desa');
-            $table->string('gambar_potensi');
+            $table->longText('content');
+            $table->string('gambar');
             $table->timestamps();
         });
     }

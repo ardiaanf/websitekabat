@@ -30,67 +30,36 @@
                                  <div class="card-body">
                           <form method="post" action="{{route('potensi.store')}}" enctype="multipart/form-data">
                                 @csrf  
-                                                <!-- <div class="form-grup mb-3">
-                                                <label for="" style="color: #686868;"  class="col-sm-7 col-form-label">-Judul Umkm</label>
-                                                    <input  type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" id="example-text-input"  placeholder="Masukkan Judul">
-                                                    @error('judul')
-                                                    <div class="invalid-feedback">
-                                                    {{$message}}
-                                                     </div>
-                                                    @enderror
-                                                     </div> -->
 
                                                      <div class="form-grup mb-3">
                                                      <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
-                                                     <select class="form-select" aria-label="Default select example" name="desa_id"
+                                                     <select class="form-select  @error('desa_id') is-invalid @enderror" aria-label="Default select example" name="desa_id"
                                             id="desa_id">
                                                      <option selected>Pilih Desa</option>
                                                      @foreach ($desa as $potensidesa)
                                             <option value="{{$potensidesa->id}}">{{$potensidesa->nama_desa}}</option>
                                             @endforeach
-</select>
-</div>
-                                      
-                                       <!-- <div class="form-group mb-3">
-    <label for="exampleFormControlSelect1" style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
-    <select class="form-select"  name="desa_id" id="desa_id">
-    <option selected>Pilih Desa</option>
-    @foreach ($desa as $potensidesa)
-      <option value="{{$potensidesa->id}}">{{$potensidesa->nama_desa}}</option>
-      @endforeach
-    </select>
-  </div> -->
-
+                                            </select>
+                                             </div>
+                                    
                                                         <div class="form-grup mb-3">
                                                 <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Potensi Desa</label>
-                                                 <input type="file" class="form-control filestyle " name="gambar_potensi" data-buttonname="btn-secondary" >
-                                                 
-                                                 </div>
-
-                                               
-                                                <!-- <div class="form-grup mb-3">
-                                                <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Umkm</label>
-                                                 <input type="file" class="form-control filestyle @error('gambar') is-invalid @enderror" name="gambar" data-buttonname="btn-secondary" >
+                                                 <input type="file" class="form-control filestyle @error('gambar') is-invalid @enderror " name="gambar" data-buttonname="btn-secondary" >
                                                  @error('gambar')
                                                     <div class="invalid-feedback">
                                                     {{$message}}
                                                      </div>
                                                     @enderror
-                                                 </div> -->
-                                                
-                                             <!--       <div class="form-grup mb-3">
-                                                <label for="" style="color: #686868;"  class="col-sm-7 col-form-label">-Judul Umkm</label>
-                                                    <input  type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="" id="example-text-input"  placeholder="Masukkan Judul">
-                                                    @error('deskripsi')
+                                                 </div>
+                       
+                                             <div class="form-grup mb-3">
+                                                <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Deskripsi Potensi Desa</label>
+                                                <textarea type="text" id="summernote" class="form-control  @error('content') is-invalid @enderror" name="content"></textarea> 
+                                                @error('content')
                                                     <div class="invalid-feedback">
                                                     {{$message}}
                                                      </div>
                                                     @enderror
-                                                     </div> -->
-                       
-                                             <div class="form-grup mb-3">
-                                                <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Deskripsi Potensi Desa</label>
-                                                <textarea type="text" id="summernote" class="form-control  @error('deskripsi') is-invalid @enderror" name="potensi_desa"></textarea> 
                                               
                                               
                                             </div>  
@@ -133,17 +102,17 @@
                 $('#summernote').summernote({
                     
                     height: 300,
-        toolbar: [
-            [ 'style', [ 'style' ] ],
-            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
-            [ 'fontname', [ 'fontname' ] ],
-            [ 'fontsize', [ 'fontsize' ] ],
-            [ 'color', [ 'color' ] ],
-            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-            [ 'table', [ 'table' ] ],
-            [ 'insert', [ 'link'] ],
-            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-        ]
+        // toolbar: [
+        //     [ 'style', [ 'style' ] ],
+        //     [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+        //     [ 'fontname', [ 'fontname' ] ],
+        //     [ 'fontsize', [ 'fontsize' ] ],
+        //     [ 'color', [ 'color' ] ],
+        //     [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+        //     [ 'table', [ 'table' ] ],
+        //     [ 'insert', [ 'link'] ],
+        //     [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+        // ]
     });
             
 

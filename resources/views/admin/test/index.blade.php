@@ -8,7 +8,7 @@
 @endsection
 
 @section('breadcrumb')
-<h3 class="page-title">Struktur Desa</h1>
+<h3 class="page-title">Potensi Desa</h1>
 @endsection
 @section('content')
 <div class="page-content-wrapper">
@@ -17,9 +17,9 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">
-                                        <a href="{{route('struktur.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
-                                            <h4 class="mt-0 header-title">Struktur Desa</h4>
-                                       <p class="text-muted m-b-30 font-14">Struktur Desa di Kecamatan Kabat.
+                                        <a href="{{route('test.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
+                                            <h4 class="mt-0 header-title">Potensi Desa</h4>
+                                       <p class="text-muted m-b-30 font-14">Potensi Desa di Kecamatan Kabat.
                                             </p>
                                            
                                             <table id="datatable" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -28,10 +28,7 @@
 <thead>
 <tr>
     <th width="10px">No</th>
-    <th>Nama Desa</th>
-    <th>Nama</th>
-    <th>Jabatan</th>
-    <th>Foto Profil</th>
+  <th>content</th>  
    
     <th class="text-center"width="100px">Action</th>
 
@@ -41,21 +38,16 @@
 
 
 <tbody>
-@foreach($allDataStruktur as $data)
+@foreach($allData as $data)
+
 
 <tr>
 <th scope="row">{{$data->id}}</th>
-    <td>{{$data->desas->nama_desa}}</td>
-    <td>{{$data->nama}}</td> 
-    <td>{{$data->jabatan_desas->namaJabatan}}</td>
-    <td> 
-    @if ($data->fotoProfil)
-    <img src="{{ asset('storage/strukturDesa/' .$data->fotoProfil) }}" width="180px" alt="Image">
-    @else
-    <p>gambar kosong</p>
-@endif
-    </td>
-
+    <td>{!! $data->content !!}</td>
+    
+    
+  
+  
     <td>
     <a href=""class="btn btn-success btn-sm"><i class="fa fa-eye fa-lg"></i></a>
     <a href=""class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
