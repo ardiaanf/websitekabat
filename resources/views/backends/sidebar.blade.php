@@ -75,15 +75,21 @@
         </li>
         <!-- User-->
         <li class="list-inline-item dropdown notification-list">
-            <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-               aria-haspopup="false" aria-expanded="false">
-                <img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" alt="user" class="rounded-circle">
-            </a>
+        <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+ 
+        <img src="{{ asset('assets/images/logoBwi.png') }}"  class="rounded-circle"style="border: 1px solid #CCCCCC; border-radius: 50%;">   
+</a>
+
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                <a class="dropdown-item" href="#"><i class="dripicons-user text-muted"></i> Profile</a>
+              
                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="dripicons-exit text-muted"></i> Logout</a>
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                 @csrf
+    <button type="submit" class="dropdown-item">
+        <i class="dripicons-exit text-muted"></i> Logout
+    </button>
+                </form>
             </div>
         </li>
     </ul>

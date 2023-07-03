@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('desas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_desa');
+            $table->float('luas_desa')->nullable();
+            $table->float('jumlah_penduduk')->nullable();
+            $table->longText('tentang_desa');
             $table->timestamps();
         });
     }

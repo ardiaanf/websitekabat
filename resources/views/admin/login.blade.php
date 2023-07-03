@@ -1,63 +1,62 @@
-@extends('layouts.master-without-nav')
+@extends('backends.master-without-nav')
 
 @section('content')
- <!-- Begin page -->
-        <div class="accountbg"></div>
-        <div class="wrapper-page">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="text-center m-0">
-                        <a href="index" class="logo logo-admin"><img src="{{ URL::asset('assets/images/logo.png') }}" height="30" alt="logo"></a>
-                    </h3>
+<div class="page-content-wrapper">
+            <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Login') }}</div>
 
-                    <div class="p-3">
-                        <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
-                        <p class="text-muted text-center">Sign in to continue to Admiria.</p>
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
 
-                        <form class="form-horizontal m-t-30" action="index">
+                            <div class="form-group row">
+                                <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama Pengguna') }}</label>
 
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username">
-                            </div>
+                                <div class="col-md-6">
+                                    <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
 
-                            <div class="form-group">
-                                <label for="userpassword">Password</label>
-                                <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
-                            </div>
-
-                            <div class="form-group row m-t-20">
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                        <label class="custom-control-label" for="customControlInline">Remember me</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 text-right">
-                                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
+                                    @error('nama')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <div class="form-group m-t-10 mb-0 row">
-                                <div class="col-12 m-t-20">
-                                    <a href="pages-recoverpw" class="text-muted"><i class="mdi mdi-lock    "></i> Forgot your password?</a>
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Kata Sandi') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-success">
+                                        {{ __('Login') }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="m-t-30 text-center">         
+                            <p class="text-black">© {{ date("Y",strtotime("-1 year")) }} - {{date('Y')}} Kec.Kabat</p>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
-
-            <div class="m-t-40 text-center">
-                <p class="text-white">Don't have an account ? <a href="pages-register" class="font-500 font-14 text-white font-secondary"> Signup Now </a> </p>
-                <p class="text-white">© {{ date("Y",strtotime("-1 year")) }} - {{date('Y')}} Admiria. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
-            </div>
-
         </div>
+    </div>
+</div>
 @endsection
 
-@section('script')
-
-@endsection
 

@@ -9,6 +9,9 @@
 <!-- Responsive datatable examples -->
 <link href="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet"
     type="text/css" />
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 @endsection
 
 @section('breadcrumb')
@@ -26,8 +29,8 @@
                                     style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;"
                                     type="button"
                                     class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
-                            <h4 class="mt-0 header-title">Halaman Berita</h4>
-                            <p class="text-muted m-b-30 font-14">Data Berita di Kecamatan Kabat.
+                            <h4 class="mt-0 header-title">Berita</h4>
+                            <p class="text-muted m-b-30 font-14">Halaman Berita.
                             </p>
 
                             <table id="datatable" class="table table-bordered dt-responsive" cellspacing="0"
@@ -37,33 +40,26 @@
                                         <th width="10px">No</th>
                                         <th>Judul Berita</th>
                                         <th>Gambar</th>
-                                        {{-- <th>Konten</th> --}}
+                                      
                                         <th class="text-center" width="100px">Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach($berita as $berita)
+                                    @foreach($berita as $data)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{$berita->judul}}</td>
+                                        <td style="max-width:150px;">
+                                        {{$data->judul}}</td>
                                         <td>
-                                            <img src="{{asset('storage/berita/' .$berita->gambar)}}" width="180px"
+                                            <img src="{{asset('storage/berita/gambar/' .$data->gambar)}}" width="180px"
                                                 alt="Image">
                                         </td>
-                                        {{-- <td><p style="max-width: 100%;">{{$berita->konten}}</p></td> --}}
-                                        <td>
-                                            <form action="{{ route('berita.delete', $berita->id) }}" method="post">
-                                                <a href="{{ route('berita.edit', $berita->id) }}"
-                                                    class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm"> <i
-                                                        class=" fa fa-trash fa-lg"></i></button>
-
-                                            </form>
-
-
+                                     
+                                        <td> 
+                                        <a href="{{ route('berita.show', $data->id) }}"class="btn btn-success btn-sm"><i class="fa fa-eye fa-lg"></i></a>
+                                        <a href="{{ route('berita.edit', $data->id) }}"class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>            
+                                        <a href="{{route('berita.delete', $data->id)}}" id="delete"class="btn btn-danger btn-sm"  ><i class="fa fa-trash fa-lg"></i></a>
                                         </td>
 
 
@@ -103,4 +99,67 @@
 
     <!-- Datatable init js -->
     <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+
+<script>
+    function showSuccessAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses',
+            text: 'Berhasil!'
+        });
+    }
+    </script>
+
+    <script>
+   $(function(){
+    $(document).on('click', '#delete', function(e){
+      e.preventDefault();
+      var link=$(this).attr("href");
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Anda yakin??',
+        text: "Data terhapus tidak dapat dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Hapus!',
+        cancelButtonText: 'Batal!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href=link
+          swalWithBootstrapButtons.fire(
+            'Terhapus!',
+            'Data sudah dihapus.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Dibatalkan',
+            'Data belum terhapus :)',
+            'error'
+          )
+        }
+      })
+    });
+   });
+</script>
+
+
+@if (session('success'))
+    <script>
+        showSuccessAlert();
+    </script>
+@endif
+
     @endsection

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('potensi_desas', function (Blueprint $table) {
             $table->id();
             $table->string('desa_id');
+            $table->string('judul');
             $table->longText('content');
             $table->string('gambar');
             $table->timestamps();

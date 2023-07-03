@@ -28,46 +28,43 @@
                           
                                 <div class="card m-b-20">
                                  <div class="card-body">
-                          <form method="post" action="" enctype="multipart/form-data">
+                          <form method="post" action="{{route('potensi.update', $editData->id)}}" enctype="multipart/form-data">
                           @csrf
-                                @method('PUT')
-                                {{--$potensi--}}
-                              
 
-                                                     <div class="form-grup mb-3">
-                                                     <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
-                                                     <select class="form-select  @error('desa_id') is-invalid @enderror" aria-label="Default select example" name="desa_id"
+                          <div class="form-grup mb-3">
+                                    <label for="" style="color: #686868;" class="col-sm-7 col-form-label">-Judul/Nama Potensi</label>
+                                    <input type="text" class="form-control"
+                                        name="judul" value="{{$editData->judul}}" id="example-text-input" placeholder="Judul/Nama Potensi">
+                                 
+                                </div>
+
+                                           <div class="form-grup mb-3">
+                                           <label  for="desa_id"  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
+                                            <select class="form-select  " aria-label="Default select example" name="desa_id"
                                             id="desa_id">
-                                                     <option selected>Pilih Desa</option>
-                                                    
-                                            <option value=""></option>
-                                         
+                                            @foreach ($desa as $potensi)
+                                            <option value="{{$potensi->id}}" {{ $potensi->id == $editData->desa_id ? 'selected' : '' }}>
+                                           {{ $potensi->nama_desa}}
+                                            </option>
+                                            @endforeach
                                             </select>
                                              </div>
-                                    
-                                                        <div class="form-grup mb-3">
+                                        
+                                                <div class="form-grup mb-3">
                                                 <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Potensi Desa</label>
-                                                 <input type="file" class="form-control filestyle @error('gambar') is-invalid @enderror " name="gambar" value="{{ $potensi->gambar }}" data-buttonname="btn-secondary" >
-                                                 @error('gambar')
-                                                    <div class="invalid-feedback">
-                                                    {{$message}}
-                                                     </div>
-                                                    @enderror
+                                                <div class="py-2">
+                                                <img src="{{ asset('storage/potensidesa/gambar/' . $editData->gambar) }}" height="100" alt="">
+                                                 </div>
+                                                 <input type="file" class="form-control filestyle  " name="gambar" value="" data-buttonname="btn-secondary" >
+                                              
                                                  </div>
                        
                                              <div class="form-grup mb-3">
                                                 <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Deskripsi Potensi Desa</label>
-                                                <textarea type="text" id="summernote" class="form-control  @error('content') is-invalid @enderror" name="content">{{$potensi->konten }}</textarea> 
-                                                @error('content')
-                                                    <div class="invalid-feedback">
-                                                    {{$message}}
-                                                     </div>
-                                                    @enderror
-                                              
-                                              
+                                                <textarea type="text" id="summernote" class="form-control" name="content">{{$editData->content }}</textarea>                                                                                                   
                                             </div>  
 
-                                           <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-info waves-light btn-sm waves-effect">Simpan</button>
+                                           <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-success waves-light btn-sm waves-effect">Simpan</button>
                                         </div>
                                     </div>
                                    

@@ -12,7 +12,10 @@ class desa extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
-        'nama_desa'
+        'nama_desa',
+        'luas_desa',
+        'jumlah_penduduk',
+        'tentang_desa'
     ];
     public function potensiDesa(){
         return $this->hasMany(potensiDesa::class);

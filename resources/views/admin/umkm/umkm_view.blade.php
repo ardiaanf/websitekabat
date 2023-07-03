@@ -6,6 +6,7 @@
 <link href="{{ URL::asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
  <!-- Responsive datatable examples -->
 <link href="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 @endsection
 
 @section('breadcrumb')
@@ -19,12 +20,13 @@
                                 <div class="col-12">
                                     <div class="card m-b-20">
                                         <div class="card-body">
-                                        <a href="{{route('umkm.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-success waves-light btn-sm waves-effect">Tambah</button></a>
+                                        <a href="{{route('umkm.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
                                             <h4 class="mt-0 header-title">Log Umkm</h4>
-                                       <p class="text-muted m-b-30 font-14">Data Umkm di Kecamatan Kabat.
+                                       <p class="text-muted m-b-30 font-14">Halaman Umkm.
                                             </p>
                                            
-                                            <table id="datatable" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <table id="datatable" class="table table-bordered dt-responsive" cellspacing="0"
+                                width="100%">
 
             
 <thead>
@@ -42,19 +44,18 @@
 <tbody>
 @foreach($allDataUmkm as $umkm)
 <tr>
-<th scope="row">{{$umkm->id}}</th>
-    <td>{{$umkm->judul}}</td>
+<th scope="row">{{$loop -> iteration}}</th>
+  <td style="max-width:150px;">
+  {{$umkm->judul}}</td>
     
     <td>
-        <img src="{{ asset('storage/umkm/' .$umkm->gambar) }}" width="180px" alt="Image">
+        <img src="{{ asset('storage/umkm/gambar/' .$umkm->gambar) }}" width="180px" alt="Image">
     </td>
-    
+
     <td>
-    <a href=""class="btn btn-success btn-sm"><i class="fa fa-edit fa-lg"></i></a>
-
-    <button class="btn btn-danger btn-sm"><i class="fa fa-trash fa-lg"></i></button>
-      
-
+    <a href="{{ route('umkm.show', $umkm->id) }}"class="btn btn-success btn-sm"><i class="fa fa-eye fa-lg"></i></a>
+    <a href="{{ route('umkm.edit', $umkm->id) }}"class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
+    <a href="{{ route('umkm.delete', $umkm->id) }}" id="delete" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-lg"></i></a>
     </td>
    
    
@@ -94,5 +95,67 @@
 
 <!-- Datatable init js -->
 <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+
+<script>
+    function showSuccessAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses',
+            text: 'Berhasil!'
+        });
+    }
+    </script>
+
+    <script>
+   $(function(){
+    $(document).on('click', '#delete', function(e){
+      e.preventDefault();
+      var link=$(this).attr("href");
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Anda yakin??',
+        text: "Data terhapus tidak dapat dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Hapus!',
+        cancelButtonText: 'Batal!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href=link
+          swalWithBootstrapButtons.fire(
+            'Terhapus!',
+            'Data sudah dihapus.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Dibatalkan',
+            'Data belum terhapus :)',
+            'error'
+          )
+        }
+      })
+    });
+   });
+</script>
+
+
+@if (session('success'))
+    <script>
+        showSuccessAlert();
+    </script>
+@endif
 @endsection
 
