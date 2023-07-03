@@ -15,6 +15,14 @@ use App\Http\Controllers\backend\fotoProfilController;
 use App\Http\Controllers\backend\pengumumanController;
 use App\http\Controllers\frontend\homeController;
 use App\Http\Controllers\backend\messageController;
+use App\Http\Controllers\frontend\beritaUserController;
+
+
+Route::get('/home', [beritaUserController::class, 'index']);
+Route::get('/desa', function () {
+    return view('user/desa');
+});
+Route::get('/detail_berita/{id}', [beritaUserController::class, 'detail_berita']);
 
 Route::get('/clear-user-sent-message-session', [messageController::class, 'clearUserSentMessageSession'])
     ->name('clear.user-sent-message-session');

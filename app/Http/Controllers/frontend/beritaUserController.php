@@ -4,11 +4,9 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\desa;
+use App\Models\berita;
 
-
-class pencarianController extends Controller
+class beritaUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,9 @@ class pencarianController extends Controller
      */
     public function index()
     {
-        $desa = desa::all();
-        // dd($desa);
-        return view('user.desa', ['desa' => $desa]);
+        $beritas = berita::paginate(20);
+        // dd($beritas);
+        return view('user.home', compact('beritas'));
     }
 
     /**
@@ -27,7 +25,10 @@ class pencarianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,11 +36,9 @@ class pencarianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function cari(Request $request)
+    public function store(Request $request)
     {
-        $cari = $request->cari;
-        $desa = desa::where('nama_desa', 'LIKE',"%".$cari."%")->get();
-        return view('user.daftarDesa',['desa'=> $desa]);
+        //
     }
 
     /**
@@ -85,5 +84,11 @@ class pencarianController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function detail_berita($id)
+    {
+        $beritas = berita::findOrFail($id);
+        return view('user.detailBerita', compact('id', 'beritas'));
     }
 }

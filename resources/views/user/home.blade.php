@@ -235,7 +235,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                   <div class="blog-item bg-light rounded overflow-hidden">
                     <div class="blog-img position-relative overflow-hidden">
-                      <img class="img-fluid1" src="{{asset('storage/berita/'.$berita->gambar)}}" alt="" title="" />
+                      <img class="img-fluid1" src="{{asset('storage/berita/gambar/'.$berita->gambar)}}" alt="" title="" />
                       <a class="position-absolute top-0 start-0 bg-secondary text-white rounded-end mt-5 py-2 px-4" href="">Web Design</a>
                     </div>
                     <div class="p-4">
