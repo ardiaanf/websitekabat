@@ -9,9 +9,10 @@ use App\Http\Controllers\backend\potensiDesaController;
 use App\Http\Controllers\backend\strukturDesaController;
 use App\Http\Controllers\backend\testController;
 use App\Http\Controllers\backend\content;
+use App\Http\Controllers\frontend\beritaUserController;
+use App\Http\Controllers\frontend\pencarianController;
+use Illuminate\Support\Facades\DB;
 
-// use App\Http\Controllers\backend\beritacontroller;
-// use App\Http\Controllers\frontend\beritaUserController;
 
 
 /*
@@ -25,19 +26,19 @@ use App\Http\Controllers\backend\content;
 |
 */
 
- //Route::get('/', function () {
-  // return view('user/home');
- //});
-// Route::get('/strukturKecamatan', function () {
-//     return view('user/struktur');
-// });
-// Route::get('/pengaduan', function () {
-//     return view('user/pengaduan');
-// });
-
-// Route::get('/home', [beritaUserController::class,'index'])->name('berita.user');
-// Route::get('/detail_berita/{id}', [beritaUserController::class,'detail_berita']);
-
+ Route::get('/home', function () {
+  return view('user/home');
+ });
+Route::get('/strukturKecamatan', function () {
+    return view('user/struktur');
+});
+Route::get('/pengaduan', function () {
+    return view('user/pengaduan');
+});
+    Route::get('/home', [beritaUserController::class,'index'])->name('berita.user');
+    Route::get('/detail_berita/{id}', [beritaUserController::class,'detail_berita']);
+    Route::get('/desa',[pencarianController::class,'index']);
+    Route::get('/desa/cari',[pencarianController::class,'cari']);
 
 Route::prefix('umkm')->group(function(){
     Route::get('/view', [umkmController::class,'umkmView'])->name('umkm.view');
@@ -65,9 +66,7 @@ Route::prefix('berita')->group(function(){
     Route::get('/edit/{id}', [beritacontroller::class, 'edit'])->name('berita.edit');
     Route::put('/update/{id}', [beritacontroller::class, 'update'])->name('berita.update');
     Route::delete('/delete/{id}', [beritacontroller::class, 'destroy'])->name('berita.delete');
-
 });
-
 Route::prefix('desa')->group(function(){
     Route::get('/view', [desaController::class,'index'])->name('index.view'); 
     Route::post('/store', [desaController::class,'store'])->name('desa.store'); 
@@ -99,9 +98,8 @@ Route::prefix('strukturDesa')->group(function(){
 
 
 Route::prefix('test')->group(function(){
-    Route::get('/view', [testController::class,'index'])->name('indextest.view'); 
+     Route::get('/view', [testController::class,'index'])->name('indextest.view'); 
      Route::get('/add', [testController::class,'add'])->name('test.add');
-    
      Route::post('/store', [testController::class,'store'])->name('test.store');
 });
 
@@ -112,5 +110,3 @@ Route::prefix('test')->group(function(){
 
 
     
-
-

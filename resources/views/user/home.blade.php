@@ -132,38 +132,44 @@
         <div class="row g-5">
               <div class="col-lg-4 wow zoomIn" data-wow-delay="0.2s">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
-                  <i class="fa fa-cubes text-white"></i>
+                  <i class="fa fa-id-card text-white"></i>
                 </div>
                 <h4>Pelayanan penertiban KTP</h4>
               </div>
               <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
-                  <i class="fa fa-award text-white"></i>
+                  <i class="fa fa-print text-white"></i>
                 </div>
                 <h4>Pelayanan pencetakan kartu keluarga (LKK)</h4>
             </div>
               <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
-                  <i class="fa fa-award text-white"></i>
+                  <i class="fa fa-file text-white"></i>
                 </div>
                 <h4>Pelayanan surat pernyataan miskin (online)</h4>
               </div>
               <div class="col-lg-4 wow zoomIn" data-wow-delay="0.4s">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
-                  <i class="fa fa-users-cog text-white"></i>
+                  <i class="fa fa-user text-white"></i>
                 </div>
                 <h4>Pelayanan penduduk pindah datang dan keluar</h4>
               </div>
               <div class="col-lg-4 wow zoomIn" data-wow-delay="0.8s">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
-                  <i class="fa fa-phone-alt text-white"></i>
+                  <i class="fa fa-clipboard text-white"></i>
                 </div>
                 <h4>Pelayanan rekomendasi surat keterangan catatan kepolisian (SKCK)</h4>
+              </div>
+              <div class="col-lg-4 wow zoomIn" data-wow-delay="0.8s">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
+                  <i class="fa fa-id-card text-white"></i>
+                </div>
+                <h4>Pelayanan ktp digital IKD(Identitas Kependudukan Digital)</h4>
               </div>
             </div>
           </div>
         </div>
-    <!-- Testimonial Start -->
+    {{-- <!-- Testimonial Start -->
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div class="container py-5">
         <div class="section-title text-center position-relative pb-3 mb-4 mx-auto" style="max-width: 600px">
@@ -214,7 +220,7 @@
         </div>
       </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Testimonial End --> --}}
 
 
     <!-- Blog Start -->
@@ -224,12 +230,12 @@
           <h5 class="fw-bold text-secondary text-uppercase">Berita Kecamatan</h5>
           <h1 class="mb-0">Berita Terbaru</h1>
         </div>
-              <div class="row g-5">
+              <div class="row g-5 ">
                 @foreach ($beritas as $berita)
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                   <div class="blog-item bg-light rounded overflow-hidden">
                     <div class="blog-img position-relative overflow-hidden">
-                      <img class="img-fluid1" src="{{asset('storage/berita/' .$berita->gambar)}}" alt="" title="" />
+                      <img class="img-fluid1" src="{{asset('storage/berita/'.$berita->gambar)}}" alt="" title="" />
                       <a class="position-absolute top-0 start-0 bg-secondary text-white rounded-end mt-5 py-2 px-4" href="">Web Design</a>
                     </div>
                     <div class="p-4">
@@ -237,37 +243,20 @@
                         <small class="me-3"><i class="far fa-user text-secondary me-2"></i></small>
                         <small><i class="far fa-calendar-alt text-secondary me-2"></i>01 Jan, 2045</small>
                       </div>
-                      <h4 class="mb-3">{{ $berita->judul }}</h4>
-                      <p class="text">{!! $berita->konten !!}</p>
-                      <a class="text-uppercase" href="{{url('detail_berita',$berita->id)}}">Read More <i class="bi bi-arrow-right"></i></a>
+                      <h4 class="mb-3">{{$berita->judul}}</h4>
+                      <p class="text">{!!\Illuminate\Support\Str::limit(strip_tags($berita->konten),$limit=20,$end='...')!!}</p>
+                      <a class="text-uppercase" href="{{url('detail_berita',$berita->id)}}">Read More<i class="bi bi-arrow-right"></i></a>
                     </div>
                   </div>
                 </div>
-          @endforeach
+                @endforeach
               </div>
-      </div>
-    </div>
-          
-    
-    <!-- Blog Start -->
-
-    <!-- Vendor Start -->
-    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-      <div class="container py-5 mb-5">
-        <div class="bg-white">
-          <div class="owl-carousel vendor-carousel">
-            <img src="img/vendor-1.jpg" alt="" />
-            <img src="img/vendor-2.jpg" alt="" />
-            <img src="img/vendor-3.jpg" alt="" />
-            <img src="img/vendor-4.jpg" alt="" />
-            <img src="img/vendor-5.jpg" alt="" />
-            <img src="img/vendor-6.jpg" alt="" />
-            <img src="img/vendor-7.jpg" alt="" />
-            <img src="img/vendor-8.jpg" alt="" />
-            <img src="img/vendor-9.jpg" alt="" />
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Vendor End -->
+  </div>
+    <!-- Blog Start -->
+
 @endsection
