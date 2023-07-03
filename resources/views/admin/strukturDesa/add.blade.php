@@ -33,52 +33,47 @@
                                                
 
                                                      <div class="form-grup mb-3 ">
-                                                     <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
-                                                     <select class="form-select" aria-label="Default select example" name="desa_id" id="desa_id">
-                                                     <option selected>Pilih Desa</option>
+                                                     <label  for="desa_id"  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
+                                                     <select class="form-select  @error('desa_id') is-invalid @enderror" aria-label="Default select example" name="desa_id" id="desa_id">
+                                                     <option selected disabled>Pilih Desa</option>
                                                      @foreach ($desa as $strukdesa)
                                                      <option value="{{$strukdesa->id}}">{{$strukdesa->nama_desa}}</option>
                                                      @endforeach
-</select>
+                                                    </select>
+                                                    @error('desa_id')
+                                                     <div class="invalid-feedback">{{ $message}}</div>
+                                                      @enderror
                                                      </div>
-                                     
+
+                   
 
                                                 <div class="form-grup mb-3">
-                                                <label for="" style="color: #686868;"  class="col-sm-7 col-form-label">-Nama</label>
-                                                    <input  type="text" class="form-control" name="nama" value="" id="example-text-input"  placeholder="Masukkan Judul">
-                                                   
+                                                <label for="nama" style="color: #686868;"  class="col-sm-7 col-form-label">-Nama</label>
+                                                    <input  type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="" id="example-text-input"  placeholder="Masukkan Nama">
+                                                    @error('nama')
+                                                     <div class="invalid-feedback">{{ $message}}</div>
+                                                      @enderror    
                                                      </div>
 
-                                                     <!-- <div class="form-grup mb-3">
-                                                <label for="" style="color: #686868;"  class="col-sm-7 col-form-label">-Jabatan</label>
-                                                    <input  type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="" id="example-text-input"  placeholder="Masukkan Judul">
-                                                   
-                                                     </div> -->
-                                                     <div class="form-grup mb-3">
-                                                     <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Jabatan</label>
-                                                     <select class="form-select" aria-label="Default select example" name="jabatan"
-                                            id="jabatan">
-                                                     <option selected>Jabatan Desa</option>
-                                                     @foreach ($jabatan as $strukdesaa)
-                                                     <option value="{{$strukdesaa->id}}">{{$strukdesaa->namaJabatan}}</option>
+                                                     <div class="form-group mb-3">
+                                                     <label for="jabatan" style="color: #686868;" class="col-sm-7 col-form-label">Pilih Jabatan</label>
+                                                     <select class="form-select @error('jabatan') is-invalid @enderror" aria-label="Default select example" name="jabatan" id="jabatan">
+                                                     <option selected disabled>Pilih Jabatan</option>
+                                                     @foreach ($jabatanDesa as $jabatan)
+                                                     <option value="{{ $jabatan }}">{{ $jabatan }}</option>
                                                      @endforeach
-</select>
-</div>
-                                      
+                                                     </select>
+                                                     @error('jabatan')
+                                                     <div class="invalid-feedback">{{ $message }}</div>
+                                                      @enderror
+                                                      </div>
 
                                                         <div class="form-grup mb-3">
-                                                <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Foto Profil</label>
-                                                 <input type="file" class="form-control filestyle " name="fotoProfil" id="fotoProfil" accept="fotoProfil/*" nullable data-buttonname="btn-secondary"  >
-                                                 
-                                                 </div>
+                                                        <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Foto Profil</label>
+                                                        <input type="file" class="form-control filestyle " name="fotoProfil" id="fotoProfil"  data-buttonname="btn-secondary"  >
+                                                         </div>  
 
-                                               
-                                               
-                                              
-                                              
-                                           
-
-                                           <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-info waves-light btn-sm waves-effect">Simpan</button>
+                                           <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-success waves-light btn-sm waves-effect">Simpan</button>
                                         </div>
                                     </div>
                                    

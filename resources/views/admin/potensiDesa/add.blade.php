@@ -31,16 +31,33 @@
                           <form method="post" action="{{route('potensi.store')}}" enctype="multipart/form-data">
                                 @csrf  
 
+                                <div class="form-grup mb-3">
+                                    <label for="" style="color: #686868;" class="col-sm-7 col-form-label">-Judul/Nama Potensi</label>
+                                    <input type="text" class="form-control @error('judul') is-invalid @enderror"
+                                        name="judul" value="" id="example-text-input" placeholder="Judul/Nama Potensi">
+                                    @error('judul')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
+                                </div>
+
                                                      <div class="form-grup mb-3">
                                                      <label  for=""  style="color: #686868;"class="col-sm-7 col-form-label">-Pilih Desa</label>
                                                      <select class="form-select  @error('desa_id') is-invalid @enderror" aria-label="Default select example" name="desa_id"
-                                            id="desa_id">
-                                                     <option selected>Pilih Desa</option>
+                                                     id="desa_id">
+                                                     <option selected disabled>Pilih Desa</option>
                                                      @foreach ($desa as $potensidesa)
-                                            <option value="{{$potensidesa->id}}">{{$potensidesa->nama_desa}}</option>
-                                            @endforeach
-                                            </select>
-                                             </div>
+                                                     <option value="{{$potensidesa->id}}">{{$potensidesa->nama_desa}}</option>
+                                                     @endforeach
+                                                     </select>
+                                                  @error('desa_id')
+                                                 <div class="invalid-feedback">
+                                                  {{$message}}</div>
+                                                    @enderror
+                                                    </div>
+                                 
+                                             
                                     
                                                         <div class="form-grup mb-3">
                                                 <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Potensi Desa</label>
@@ -64,7 +81,7 @@
                                               
                                             </div>  
 
-                                           <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-info waves-light btn-sm waves-effect">Simpan</button>
+                                           <button type="submit" style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "  class="btn btn-success waves-light btn-sm waves-effect">Simpan</button>
                                         </div>
                                     </div>
                                    
@@ -102,17 +119,19 @@
                 $('#summernote').summernote({
                     
                     height: 300,
-        // toolbar: [
-        //     [ 'style', [ 'style' ] ],
-        //     [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
-        //     [ 'fontname', [ 'fontname' ] ],
-        //     [ 'fontsize', [ 'fontsize' ] ],
-        //     [ 'color', [ 'color' ] ],
-        //     [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-        //     [ 'table', [ 'table' ] ],
-        //     [ 'insert', [ 'link'] ],
-        //     [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-        // ]
+        toolbar: [
+            [ 'style', [ 'style' ] ],
+            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+            [ 'fontname', [ 'fontname' ] ],
+            [ 'fontsize', [ 'fontsize' ] ],
+            [ 'color', [ 'color' ] ],
+            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+            [ 'table', [ 'table' ] ],
+            ['insert', ['picture']],
+            ['insert', ['video']],
+            [ 'insert', [ 'link'] ],
+            [ 'view', [ 'undo', 'redo', 'fullscreen' ] ]
+        ]
     });
             
 

@@ -5,6 +5,9 @@
 <link href="{{ URL::asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
  <!-- Responsive datatable examples -->
 <link href="{{ URL::asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+
 @endsection
 
 @section('breadcrumb')
@@ -19,20 +22,21 @@
                                         <div class="card-body">
                                         <a href="{{route('potensi.add')}}"><button style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right;  padding: 2px 2px;  margin-top: 25px;" type="button"  class="btn btn-primary waves-light btn-sm waves-effect">Tambah</button></a>
                                             <h4 class="mt-0 header-title">Potensi Desa</h4>
-                                       <p class="text-muted m-b-30 font-14">Potensi Desa di Kecamatan Kabat.
+                                       <p class="text-muted m-b-30 font-14">Halaman Potensi Desa.
                                             </p>
                                            
-                                            <table id="datatable" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <table id="datatable" class="table table-bordered dt-responsive" cellspacing="0"
 
             
 <thead>
 <tr>
     <th width="10px">No</th>
+    <th>Judul/Nama Potensi</th>
     <th>Nama Desa</th>
     <th>Gambar Potensi</th>
     <!-- <th>Potensi Desa</th>  -->
    
-    <th class="text-center"width="100px">Action</th>
+    <th class="text-center"width="120px">Action</th>
 
    
 </tr>
@@ -43,21 +47,28 @@
 @foreach($allDataPotensi as $data)
 
 <tr>
-<th scope="row">{{$data->id}}</th>
+<th scope="row">{{ $loop->iteration }}</th>
+
+   
+<td style="max-width:100px;">
+  {{$data->judul}}</td>
     <td>{{$data->desas->nama_desa}}</td>
     
     
-    <td> 
-    <img src="{{ asset('storage/potensidesa/' .$data->gambar) }}" width="180px" alt="Image">
+    <td style="max-width:100px;">
+    <img src="{{ asset('storage/potensidesa/gambar/' .$data->gambar) }}" width="180px" alt="Image">
     </td>
     <!-- <td>{!! $data->potensi_desa !!}</td> -->
     <td>
-    <a href=""class="btn btn-success btn-sm"><i class="fa fa-eye fa-lg"></i></a>
+    <a href="{{ route('potensi.show', $data->id) }}"class="btn btn-success btn-sm"><i class="fa fa-eye fa-lg"></i></a>
     <a href="{{ route('potensi.edit', $data->id) }}"class="btn btn-warning btn-sm"><i class="fa fa-edit fa-lg"></i></a>
-   
-    
-    <button class="btn btn-danger btn-sm"><i class="fa fa-trash fa-lg"></i></button>
-      
+      <!-- <form action="{{ route('potensi.delete', $data->id) }}" method="POST" class="d-inline" id="delete" >
+                                        @csrf
+                                        <button class="btn btn-danger btn-sm"  ><i class="fa fa-trash fa-lg"></i></button>         
+                                        </form> -->
+                                        <a href="{{route('potensi.delete', $data->id)}}" id="delete"
+                                        class="btn btn-danger btn-sm"  ><i class="fa fa-trash fa-lg"></i></a>
+
 
     </td>
    
@@ -81,6 +92,7 @@
 
 
 @section('script')
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" ></script>
@@ -102,4 +114,67 @@
 
 <!-- Datatable init js -->
 <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+
+<script>
+    function showSuccessAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Sukses',
+            text: 'Berhasil!'
+        });
+    }
+    </script>
+
+    <script>
+   $(function(){
+    $(document).on('click', '#delete', function(e){
+      e.preventDefault();
+      var link=$(this).attr("href");
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Anda yakin??',
+        text: "Data terhapus tidak dapat dikembalikan!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Hapus!',
+        cancelButtonText: 'No, Batal!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href=link
+          swalWithBootstrapButtons.fire(
+            'Terhapus!',
+            'Data sudah dihapus.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Dibatalkan',
+            'Data belum terhapus :)',
+            'error'
+          )
+        }
+      })
+    });
+   });
+</script>
+
+
+@if (session('success'))
+    <script>
+        showSuccessAlert();
+    </script>
+@endif
+
 @endsection

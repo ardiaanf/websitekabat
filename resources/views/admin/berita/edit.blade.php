@@ -14,7 +14,7 @@
 
 @section('breadcrumb')
 
-<h3 class="page-title">Tambah Berita</h1>
+<h3 class="page-title">Edit Berita</h1>
     @endsection
 
     @section('content')
@@ -26,51 +26,34 @@
 
                     <div class="card m-b-20">
                         <div class="card-body">
-                            <form method="post" action="{{route('berita.update', $berita->id)}}"
+                            <form method="post" action="{{route('berita.update', $editData->id)}}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
-                                {{--$berita--}}
+                            
                                 <div class="form-grup mb-3">
-                                    <label for="" style="color: #686868;" class="col-sm-7 col-form-label">Judul</label>
-                                    <input type="text" class="form-control @error('judul') is-invalid @enderror"
-                                        name="judul" value="{{ $berita->judul }}" id="example-text-input"
+                                    <label for="" style="color: #686868;" class="col-sm-7 col-form-label">Judul Berita</label>
+                                    <input type="text" class="form-control"
+                                        name="judul" value="{{ $editData->judul }}" id="example-text-input"
                                         placeholder="Masukkan Judul">
-                                    @error('judul')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
+                                   
                                 </div>
 
                                 <div class="form-grup mb-3">
-                                    <label for="" style="color: #686868;"
-                                        class="col-sm-7 col-form-label ">Gambar</label>
-                                    <input type="file"
-                                        class=" form-control filestyle @error('gambar') is-invalid @enderror"
-                                        name="gambar" value="{{ $berita->gambar }}" data-buttonname="btn-secondary">
-                                    @error('gambar')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                </div>
+                                                <label for=""  style="color: #686868;" class="col-sm-7 col-form-label ">-Gambar Berita</label>
+                                                <div class="py-2">
+                                                <img src="{{ asset('storage/berita/gambar/' . $editData->gambar) }}" height="100" alt="">
+                                                 </div>
+                                                 <input type="file" class="form-control filestyle" name="gambar" value="" data-buttonname="btn-secondary" >
+                                              
+                                                 </div>
 
                                 <div class="form-grup mb-3">
-                                    <label for="" style="color: #686868;" class="col-sm-7 col-form-label">konten</label>
+                                    <label for="" style="color: #686868;" class="col-sm-7 col-form-label">Deskripsi</label>
                                     <textarea type="text" id="summernote"
-                                        class="form-control  @error('konten') is-invalid @enderror"
-                                        name="konten">{{$berita->konten }}</textarea>
-                                    @error('konten')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-
+                                        class="form-control"
+                                        name="konten">{{$editData->konten }}</textarea>
                                 </div>
-                                <a class="btn btn-secondary"
-                                    style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px; margin-top:15px; "
-                                    href="{{ route('berita.view') }}"> Back</a>
+                               
                                 <button type="submit"
                                     style=" width: 90px; height: 38px; font-size: 16px; border-radius: 4px;  float: right; margin-top:15px; "
                                     class="btn btn-success waves-light btn-sm waves-effect">Update</button>
@@ -109,27 +92,27 @@
 
     @section('script-bottom')
     <script>
-        jQuery(document).ready(function () {
-            $('#summernote').summernote({
+         jQuery(document).ready(function(){
+                $('#summernote').summernote({
+                    
+                    height: 300,
+        toolbar: [
+            [ 'style', [ 'style' ] ],
+            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+            [ 'fontname', [ 'fontname' ] ],
+            [ 'fontsize', [ 'fontsize' ] ],
+            [ 'color', [ 'color' ] ],
+            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+            [ 'table', [ 'table' ] ],
+            ['insert', ['picture']],
+            ['insert', ['video']],
+            [ 'insert', [ 'link'] ],
+            [ 'view', [ 'undo', 'redo', 'fullscreen' ] ]
+        ]
+    });
+            
 
-                height: 300,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript',
-                        'subscript', 'clear'
-                    ]],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ol', 'ul', 'paragraph', 'height']],
-                    ['table', ['table']],
-                    ['insert', ['link']],
-                    ['view', ['undo', 'redo', 'fullscreen', 'codeview', 'help']]
-                ]
             });
-
-
-        });
-
-    </script>
+      
+</script>
     @endsection

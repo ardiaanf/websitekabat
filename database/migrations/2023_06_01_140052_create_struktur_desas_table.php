@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('desa_id');
             $table->string('nama');
-            $table->string('jabatan');
+            $table->enum('jabatan', ['Kepala Desa']);
             $table->string('fotoProfil')->nullable();
             $table->timestamps();
         });

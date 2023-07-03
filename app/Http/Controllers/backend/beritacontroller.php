@@ -5,40 +5,33 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\berita;
-use Illuminate\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class beritacontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $berita = berita::all();
-        // $berita = berita ::paginate(20);
+      
         return view('admin.berita.berita_view', compact('berita'));
     }
+    public function show($id){
+        $berita=berita::all();
+                $showData=berita::findOrFail($id);
+                return view('admin.berita.show',compact('showData','berita'));
+        
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.berita.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $rules=[
@@ -50,110 +43,168 @@ class beritacontroller extends Controller
               $messages =[
                 'judul.required' => '*Judul harus diisi',
                 'gambar.required' => '*Gambar harus diisi',
-                'konten.required' => '*Konten harus diisi',
+                'konten.required' => '*Deskripsi harus diisi',
             ];
 
             $this->validate($request,$rules, $messages);
-            $data = new berita();
-
-            //judul
-            $data->judul=$request->input('judul');
+           
 
             //gambar
             $fileName = time().'.'.$request->gambar->extension();
-            $request->file('gambar')->storeAs('public/berita', $fileName);
+            $request->file('gambar')->storeAs('public/berita/gambar', $fileName);
+           
+
+            // content
+               $konten = $request ['konten'];
+        
+               // Handle gambar summernote
+               preg_match_all('/<img[^>]+src="([^"]+)"/', $konten, $matches);
+               $uploadedImages = $matches[1];
+           
+               foreach ($uploadedImages as $uploadedImage) {
+                   if (strpos($uploadedImage, 'data:image') === 0) {
+                      
+                       $imageData = substr($uploadedImage, strpos($uploadedImage, ',') + 1);
+                       $decodedImage = base64_decode($imageData);
+                       $imageName = time() . '_' . Str::random(8) . '.png';
+                       Storage::disk('public')->put('berita/konten/' . $imageName, $decodedImage);
+           
+                     
+                       $imageUrl = Storage::url('berita/konten/' . $imageName);
+                       $konten = str_replace($uploadedImage, $imageUrl, $konten);
+                   }
+               }
+
+            $data = new berita();
+            $data->judul=$request->judul;
             $data->gambar = $fileName;
-
-         // deskripsi
-            $data->konten= $request->input('konten');
+            $data->konten = $konten;
             $data->save();
-            return redirect()->route('berita.view')->with('info','Tambah data berhasil');
-
-        // judul ke slug
-        // $data->slug_judul = Str::slug($request->get('judul'));
-
-
+            return redirect()->route('berita.view')->with('success','Tambah data berhasil');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Request $request, $id)
     {
-        // dd($id->all());
-        // dd($id);
-        $berita = berita::findOrFail($id);
-        // dd($berita);
-        return view('admin.berita.edit', compact('berita'));
+      
+        $editData = berita::findOrFail($id);
+        return view('admin.berita.edit', compact('editData'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        $editData = berita::find($id);
+        if ($request->hasFile('gambar')) {
+            $fileCheck = 'nullable|max:1000|mimes:jpg,jpeg,png';
+        } else {
+            $fileCheck = 'max:1000|mimes:jpg,jpeg,png';
+        }
         $this->validate($request, [
             'judul'  => 'required',
-            'gambar' => 'file|mimes:png,jpg|max:2024',
+            'gambar' => 'max:1000|mimes:jpg,jpeg,png',
             'konten' => 'required|min:10'
         ]);
 
-        $berita = berita::findorfail($id);
-        $gambar = $request->file('gambar');
+        if ($request->hasFile('gambar')) {
+            if (\File::exists('storage/berita/gambar'.$editData->gambar)) {
+                \File::delete('storage/berita/gambar'.$editData->gambar);
+            }
+            $fileName = time().'.'.$request->gambar->extension();
+            $request->file('gambar')->storeAs('public/berita/gambar', $fileName);
+       }
 
-        if (!empty($gambar)) {
-            $data = $request->all();
-            $gambar = $request->file('gambar');
-            $new_gambar = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . '_' . $gambar->GetClientOriginalName();
-            $data['gambar'] = '' . $new_gambar;
-            $gambar->storeAs('public/berita', $new_gambar);
-            $berita->update($data);
-        } else {
-            $data['judul'] = $request->judul;
-            $berita->update($data);
-            $data['konten'] = $request->konten;
+       if ($request->hasFile('gambar')) {
+            $checkFileName = $fileName;
+           
+       } else {
+       
+        $checkFileName = $editData->gambar;
+       }
+
+        // content
+        $konten = $request ['konten'];
+        
+        // Handle gambar summernote
+        preg_match_all('/<img[^>]+src="([^"]+)"/', $konten, $matches);
+        $uploadedImages = $matches[1];
+        $uploadedImageUrls = [];
+    
+        foreach ($uploadedImages as $uploadedImage) {
+            if (strpos($uploadedImage, 'data:image') === 0) {
+               
+                $imageData = substr($uploadedImage, strpos($uploadedImage, ',') + 1);
+                $decodedImage = base64_decode($imageData);
+                $imageName = time() . '_' . Str::random(8) . '.png';
+                Storage::disk('public')->put('berita/konten/' . $imageName, $decodedImage);
+                $imageUrl = Storage::url('berita/konten/' . $imageName);
+                $konten = str_replace($uploadedImage, $imageUrl, $konten);
+                $uploadedImageUrls[] = $imageUrl;
+
+               
+               
+            }
         }
+        preg_match_all('/<img[^>]+src="([^"]+)"/', $editData->konten, $oldImages);
+        $oldUploadedImages = $oldImages[1];
+    
+        foreach ($oldUploadedImages as $oldUploadedImage) {
+            if (strpos($oldUploadedImage, 'storage/berita/konten') !== false && !in_array($oldUploadedImage, $uploadedImages)) {
+                $oldImagePath = str_replace(Storage::url(''), '', $oldUploadedImage);
+                Storage::disk('public')->delete($oldImagePath);
+            }
+        }
+
+        $editData->update([
+        $editData->judul=$request->input('judul'),
+        'gambar' => $checkFileName,
+        'konten' => $konten,
+    ]);
         return redirect()->route('berita.view')->with('success', 'Data berita berhasil ditambahkan');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        // dd($id);
-        // $berita =$id->gambar;
-        // Storage::disk('public/berita')->delete($berita);
-        // $id->delete();
-        berita::findOrFail($id)->delete();
-        return redirect()->route('berita.view')->with('error', 'Data berita berhasil dihapus');
-
-
-        // dd($id);
-        // $berita = berita::where('id', $id);
-        // $berita->delete();
-        // return redirect()->route('berita.view')->with('info','data berhasil dihapus');
+    public function destroy(Request $request, $id)
+{
+    $berita = berita::findOrFail($id);
+    
+    // Hapus gambar utama
+    if ($berita->gambar) {
+        Storage::disk('public')->delete('berita/gambar/' . $berita->gambar);
     }
+
+    // content
+    $konten = $berita->konten;
+
+    // Handle gambar summernote
+    preg_match_all('/<img[^>]+src="([^"]+)"/', $konten, $matches);
+    $uploadedImages = $matches[1];
+
+    foreach ($uploadedImages as $uploadedImage) {
+        if (strpos($uploadedImage, 'storage/berita/konten') !== false) {
+            $imagePath = str_replace(Storage::url(''), '', $uploadedImage);
+            Storage::disk('public')->delete($imagePath);
+        }
+    }
+
+    // Hapus data berita
+    $berita->delete();
+
+    return redirect()->route('berita.view')->with('success', 'Data berita berhasil dihapus');
 }
+}
+
+ 
+//     public function destroy(Request $request ,$id)
+//     {
+       
+
+//         $delete = berita::find($id);
+           
+//         if (\File::exists('storage/berita/gambar/'.$delete->gambar)) {
+//             \File::delete('storage/berita/gambar/'.$delete->gambar); 
+//         berita::whereId($id)->delete();   
+//         return redirect()->route('berita.view')->with('success', 'Data berita berhasil dihapus');
+        
+//     }
+// }
+// }
+

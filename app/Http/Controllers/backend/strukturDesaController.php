@@ -6,113 +6,118 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\desa;
-use App\Models\jabatanDesa;
+//use App\Models\jabatanDesa;
 use App\Models\strukturDesa;
 
 class strukturDesaController extends Controller
 {
    public function index (){
-      // $data = potensiDesa::all();
-  // return view('admin.potensiDesa.potensiDesaView',/*compact('data')*/);
-  $data['allDataStruktur']=strukturDesa::with('desas','jabatan_desas' ,)->get();
+      
+  $data['allDataStruktur']=strukturDesa::with('desas',)->get();
       return view('admin.strukturDesa.index', $data);
    }
    public function add()
    {
       //  return view('admin.potensiDesa.potensiAdd');
       $desa=desa::all();
-      $jabatan=jabatanDesa::all();
-      return view('admin.strukturDesa.add',compact('desa','jabatan'));
+      $jabatanDesa =strukturDesa ::JABATAN_DESA;
+      //$jabatan=jabatanDesa::all();
+      return view('admin.strukturDesa.add',compact('desa','jabatanDesa'));
    }
    public function store(Request $request)
+    {
+      
+            $validatedData = $request->validate([
+                'desa_id' => 'required',
+                'nama' => 'required',
+                'jabatan' => 'required',
+                'fotoProfil' => 'image|mimes:jpeg,png,jpg|max:2048'
+            ],[
+                 'desa_id.required' => 'desa harus diisi',
+                 'nama.required' => 'nama harus diisi.',
+                'jabatan.required' => 'Jabatan harus dipilih.'
+               
+                ]);
+
+            $data = new StrukturDesa(); // Gunakan model StrukturDesa
+            $data->desa_id = $validatedData['desa_id'];
+            $data->nama = $validatedData['nama'];
+            $data->jabatan = $validatedData['jabatan'];
+
+            // Foto Profil
+            if ($request->hasFile('fotoProfil')) {
+                $fotoProfil = $request->file('fotoProfil');
+                $fileName = uniqid() . '.' . $fotoProfil->getClientOriginalExtension();
+                $path = $fotoProfil->storeAs('public/strukturDesa/foto/', $fileName);
+                $data->fotoProfil = $fileName;
+            // } else {
+            //     $data->fotoProfil = null;
+             }
+
+            $data->save();
+
+            return redirect()->route('struktur.view')->with('info', 'Tambah Alat berhasil');
+        }        
+    
+     public function edit(Request $request, $id)
      {
-         $validateData= $request->validate([
-                
-            'desa_id'=>'required',
+      
+         $desa=desa::all();
+        //  $jabatan=jabatanDesa::all();
+        $jabatanDesa = strukturDesa::JABATAN_DESA;
+         $editData=strukturDesa::findOrFail($id);
+         return view('admin.strukturDesa.edit',compact('desa','jabatanDesa','editData'));
+     }
+     public function update(Request $request, $id)
+     {
+         $editData = strukturDesa::find($id);
+         $this->validate($request, [
+            'desa_id' =>'required',
             'nama'=>'required',
             'jabatan'=>'required',
-            'fotoProfil'=>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-            ]);
+            'fotoProfil'=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+     if ($request->hasFile('fotoProfil')) {
+        if (\File::exists('storage/strukturDesa/foto/'.$editData->fotoProfil)) {
+            \File::delete('storage/strukturDesa/foto/'.$editData->fotoProfil);
+        }
+        $fileName = time().'.'.$request->fotoProfil->extension();
+        $request->file('fotoProfil')->storeAs('public/strukturDesa/foto/', $fileName);
+   }
+
+   if ($request->hasFile('fotoProfil')) {
+        $checkFileName = $fileName;
+       
+   } else {
+   
+    $checkFileName = $editData->fotoProfil;
+   }
+         $editData->update([
+            $editData->desa_id = $request->input('desa_id') ?? $editData->desa_id,
+            $editData->jabatan = $request->input('jabatan') ?? $editData->jabatan,
+            $editData->nama=$request->nama,
+            'fotoProfil' => $checkFileName,
             
           
-            $data = new strukturDesa();
-            $data->desa_id=$request->desa_id;
-            $data->nama=$request->nama;
-            $data->jabatan=$request->jabatan;
+          
+        ]);
 
-            //gambar
+        return redirect()->route('struktur.view')->with('success', 'data berhasil di update');                
+}
 
-            if ($request->hasFile('fotoProfil')) {
-               $fotoProfil = $request->file('fotoProfil');
-   
-               // Generate a unique file name
-               $fileName = uniqid() . '.' . $fotoProfil->getClientOriginalExtension();
-   
-               // Store the image in the storage directory
-               $path = $fotoProfil->storeAs('public/strukturDesa', $fileName);
-
-               $data->fotoProfil = $fileName;
-   
-               // Perform further processing or save the path to the database
-               // For example:
-               // $imageModel = new Image();
-               // $imageModel->file_path = $path;
-               // $imageModel->save();
-
-
-   
-             
-           } else {
-               // Handle the case when no image is uploaded
-
-               $data['fotoProfil'] = null;
-              // return 'No image file uploaded.';
-           }
-
-         //    if ($request->hasFile('fotoProfil')) {
-         //       // Upload gambar jika ada file yang diunggah
-         //       $image = $request->file('fotoProfil');
-         //       $path = $image->store('public/strukturDesa'); // Simpan gambar ke direktori public/images
-   
-               
-         //   } else {
-         //       // Tangani ketika tidak ada file yang diunggah
-         //       $path = null; // Atur path menjadi null atau sesuai kebutuhan Anda
-         //   }
-
-
-            
-         //  $fileName = time().'.'.$request->fotoProfil->extension();
-         //    if ($request->file('fotoProfil')->storeAs('public/strukturDesa', $fileName)){
-         //        $data->fotoProfil = $fileName;
-         //    }else{
-         //       $data['fotoProfil'] = null;
-         //    }
-             
-         //    // $data->fotoProfil = $fileName;
-
-
-
-         //   if ($request->hasFile('fotoProfil')) {
-         //          $fileName = time().'.'.$request->fotoProfil->extension();
-         //    $fotoProfil = $request->file('fotoProfil')->storeAs('public/strukturDesa', $fileName);
-               
-         // //       // Handle image upload
-         // //       $imagePath = $fotoProfil->store('public/strukturDesa');
-               
-         // //       // Save the image path or filename to the database column
-         //      $data['fotoProfil'] = $fileName;
-         //    } else {
-         // //       // No image uploaded, set the image column to null
-         //      $data['fotoProfil'] = null;
-         // //   }
-           
-         //    }
-            
-            $data->save();
-        
-            
-            return redirect()->route('indexDesa.view')->with('info','Tambah Alat berhasil');
-     }
+public function delete($id)
+{
+    $delete = strukturDesa::find($id);
+    if (\File::exists('storage/strukturDesa/foto/'.$delete->fotoProfil)) {
+        \File::delete('storage/strukturDesa/foto/'.$delete->fotoProfil);
+     
+    strukturDesa::whereId($id)->delete();
+    return  redirect()->route('struktur.view')->with('success', 'data berhasil di hapus');
 
 }
+}
+
+      }
+
+

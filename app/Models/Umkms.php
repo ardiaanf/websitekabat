@@ -11,7 +11,7 @@ class Umkms extends Model
     protected $fillable = [
         'judul',
         'gambar',
-        'deskripsi',
+        'konten',
 
     ];
 }

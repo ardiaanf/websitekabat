@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class strukturDesa extends Model
 {
     use HasFactory;
+    const JABATAN_DESA = ['Kepala Desa'];
     protected $table = 'struktur_desas';
     protected $primarykey = 'id';
     protected $fillable = [
@@ -20,12 +21,12 @@ class strukturDesa extends Model
     public function desas(){
         return $this->belongsTo(desa::class, 'desa_id');
     }
-    public function jabatan_desas(){
-        return $this->belongsTo(jabatanDesa::class, 'jabatan');
-    }
-    public function setImageAttribute($value)
-    {
-        $this->attributes['fotoProfil'] = $value ? $value : null;
-    }
+    // public function jabatan_desas(){
+    //     return $this->belongsTo(jabatanDesa::class, 'jabatan');
+    // }
+    // public function setImageAttribute($value)
+    // {
+    //     $this->attributes['fotoProfil'] = $value ? $value : null;
+    // }
 
 }
