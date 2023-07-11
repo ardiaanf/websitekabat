@@ -16,12 +16,25 @@ use App\Http\Controllers\backend\pengumumanController;
 use App\http\Controllers\frontend\homeController;
 use App\Http\Controllers\backend\messageController;
 use App\Http\Controllers\frontend\beritaUserController;
+use App\Http\Controllers\frontend\pengaduanController;
+use App\Http\Controllers\frontend\strukturKecamatanController;
 
 
 Route::get('/home', [beritaUserController::class, 'index']);
+
 Route::get('/desa', function () {
     return view('user/desa');
 });
+
+Route::get('/strukturKecamatan', function () {
+    return view('user/strukturKecamatan');
+});
+
+Route::get('/pengaduan', function () {
+    return view('user/pengaduan');
+});
+
+Route::get('/detail_berita/{id}', [beritaUserController::class, 'detail_berita']);
 Route::get('/detail_berita/{id}', [beritaUserController::class, 'detail_berita']);
 
 Route::get('/clear-user-sent-message-session', [messageController::class, 'clearUserSentMessageSession'])

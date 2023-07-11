@@ -11,8 +11,8 @@
               </div>
               <p class="mb-4">
                 {!! $beritas->konten !!}
-                <img src="{{ asset('storage/berita/konten/') }}" alt="Gambar Contoh" style="width: 20px; height: 20px;">
-            </p>
+                {{-- <img src="{{ asset('storage/berita/gambar/'.$beritas->gambar) }}" alt="Gambar Contoh" style="width: 20px; height: 20px;"> --}}
+              </p>
             
               
               {{-- <div class="row g-0 mb-3">
@@ -32,7 +32,7 @@
             </div>
             <div class="col-lg-5" style="min-height: 500px">
               <div class="position-relative h-100">
-                <img class="position-absolute w-30 h-20 rounded wow zoomIn" data-wow-delay="0.9s" src="{{asset('storage/berita/' .$beritas->gambar)}}" style="object-fit: cover" />
+                <img class="position-absolute w-30 h-20 rounded wow zoomIn" data-wow-delay="0.9s" src="{{asset('storage/berita/gambar/' .$beritas->gambar)}}" style="object-fit: cover" />
               </div>
             </div>
           </div>

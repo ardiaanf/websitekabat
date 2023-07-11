@@ -65,12 +65,7 @@
                     <a href="/home" class="nav-item nav-link">Home</a>
                     <a href="/desa" class="nav-item nav-link">Daftar Desa</a>
                     <a href="/pengaduan" class="nav-item nav-link">Pengaduan</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pemerintahan</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="blog.html" class="dropdown-item">Visi Misi</a>
-                            <a href="/strukturKecamatan" class="dropdown-item">Struktur Pemerintahan</a>
-                        </div>
+                    <a href="/strukturKecamatan" class="nav-item nav-link">Struktur Kecamatan</a>
                     </div>
                     </div>
                   </div>
